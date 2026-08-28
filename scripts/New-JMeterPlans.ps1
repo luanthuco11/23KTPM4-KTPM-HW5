@@ -1,6 +1,9 @@
 [CmdletBinding()]
 param(
-    [string]$ExecutionDate = (Get-Date -Format 'yyyyMMdd')
+    [string]$ExecutionDate = (Get-Date -Format 'yyyyMMdd'),
+
+    [ValidateSet('Load', 'Stress', 'Spike', 'Soak')]
+    [string[]]$Scenarios = @('Load', 'Stress', 'Spike', 'Soak')
 )
 
 $ErrorActionPreference = 'Stop'
@@ -334,14 +337,14 @@ $soakGroup = New-ThreadGroupXml -Name 'Soak — 300 sustained VUs' -Threads 300 
 $soakPlan = New-TestPlanXml -Scenario 'Soak' -ThreadGroupsXml $soakGroup -ListenerName 'Simple Data Writer' -ListenerGuiClass 'SimpleDataWriter'
 
 $plans = @{
-    "23127414_Load_$ExecutionDate.jmx"   = $loadPlan
-    "23127414_Stress_$ExecutionDate.jmx" = $stressPlan
-    "23127414_Spike_$ExecutionDate.jmx"  = $spikePlan
-    "23127414_Soak_$ExecutionDate.jmx"   = $soakPlan
+    Load   = $loadPlan
+    Stress = $stressPlan
+    Spike  = $spikePlan
+    Soak   = $soakPlan
 }
 
-foreach ($entry in $plans.GetEnumerator()) {
-    $path = Join-Path $planDirectory $entry.Key
-    [System.IO.File]::WriteAllText($path, $entry.Value, [System.Text.UTF8Encoding]::new($false))
+foreach ($scenario in $Scenarios) {
+    $path = Join-Path $planDirectory "23127414_$($scenario)_$ExecutionDate.jmx"
+    [System.IO.File]::WriteAllText($path, $plans[$scenario], [System.Text.UTF8Encoding]::new($false))
     Write-Host "Generated: $path"
 }
