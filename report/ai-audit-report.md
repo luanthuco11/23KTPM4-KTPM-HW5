@@ -102,4 +102,12 @@ I use AI tools for the following tasks.
 - AI output: Inspected the lecturer baseline schema/routes and classified cart cleanup, pagination/indexes, WAL/cache/runner isolation, connection pooling, Node clustering and distributed infrastructure proposals; prepared issue drafts and final conclusions.
 - Human review and corrections: Recommendations were not accepted by plausibility alone. Cart cleanup and order pagination/indexing map directly to code and measurable trends. WAL/cache require A/B evidence. Generic connection pools, immediate Node clustering and Redis/Kubernetes were rejected as incompatible or unsupported because the current SUT uses one SQLite connection and process-local cart state. CPU remains a correlated bottleneck candidate, not a proven sole cause.
 
+### Interaction 13 — Draft and verify the mandatory AI Critique
+
+- AI tool: OpenAI Codex
+- Date and time: 2026-08-29, after the analysis and optimization review.
+- Prompt: Continue the remaining homework sections, including the mandatory 200–300-word critique.
+- AI output: Drafted a Vietnamese critique grounded in the verified Dashboard sliding-window error, incomplete parent transactions, correlation-versus-causation risk and architecture-incompatible optimization proposals.
+- Human review and corrections: The paragraph was measured at 284 whitespace-delimited words, cites the correct full-JTL values, explains why the mistakes occurred, and states the learned human-review principle. It is included both as a standalone deliverable and in the main report.
+
 > Every later AI interaction used to design plans or analyse logs must be appended with the exact prompt, full output or a durable transcript link, date/time, and the student's correction notes.
