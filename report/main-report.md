@@ -5,7 +5,7 @@
 - MSSV: `23127414`
 - Công cụ: Apache JMeter 5.6.3
 - SUT baseline: `85af3ba875c88283615e22cb108f13e2fccaf0e9`
-- Ngày chạy chính thức: 28–29/08/2026 (Load, Stress và Spike đã hoàn thành)
+- Ngày chạy chính thức: 28–29/08/2026 (Load, Stress, Spike và Soak đã hoàn thành)
 
 ## 2. Môi trường kiểm thử
 
@@ -19,7 +19,7 @@
 | Node.js | v22.16.0 |
 | JMeter | 5.6.3 |
 
-_Đã có ảnh Task Manager của Load; cần bổ sung ảnh dxdiag có cùng hostname và ảnh cho Stress, Spike, Soak._
+_Đã có ảnh JMeter Dashboard và Task Manager cho từng lần chạy; cần bổ sung ảnh dxdiag có cùng hostname._
 
 ## 3. Workflow và phạm vi endpoint
 
@@ -195,7 +195,57 @@ Bốn ảnh tại `evidence/spike/` ghi lại Statistics, bước nhảy trên A
 
 ## 9. Endurance/soak test
 
-_Kết quả chạy 10–15 phút và ngưỡng ổn định trên phần cứng thực tế._
+### 9.1 Cấu hình và mục tiêu
+
+- Test plan hỗ trợ: `23127414_Soak_20260829.jmx`.
+- Thời gian: 01:37:53–01:52:53 ngày 29/08/2026.
+- Tải: 300 VU, ramp 60 giây, tổng thời gian scheduler 900 giây; gần 14 phút ở mức 300 VU.
+- Think time: phân phối đều ngẫu nhiên 400–1000 ms trước mỗi request.
+- Report view hỗ trợ: Simple Data Writer và HTML Dashboard full-window.
+- Mục tiêu: xác định mức tải duy trì cao nhất đã kiểm chứng trên máy thật, throughput ổn định, memory ceiling và dấu hiệu suy giảm theo thời gian.
+
+Mức 300 VU được chọn vì calibration 200 VU gần như chưa tạo suy giảm, trong khi 500 VU đã làm p95 tăng rõ. Soak tại điểm giữa giúp tạo áp lực đáng kể nhưng vẫn phù hợp cho quan sát 15 phút.
+
+### 9.2 Kết quả tổng hợp
+
+| Label | Samples | Failures | Average | p50 | p90 | p95 | p99 | Max |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Login | 52.692 | 0 | 10,08 ms | 5 ms | 19 ms | 33 ms | 112 ms | 380 ms |
+| Search products | 52.658 | 0 | 8,81 ms | 3 ms | 18 ms | 32 ms | 108 ms | 337 ms |
+| Product detail | 52.621 | 0 | 8,98 ms | 3 ms | 18 ms | 32 ms | 110 ms | 372 ms |
+| View cart | 52.579 | 0 | 4,19 ms | 2 ms | 7 ms | 13 ms | 48 ms | 152 ms |
+| Add to cart | 52.550 | 0 | 4,20 ms | 2 ms | 7 ms | 13 ms | 47 ms | 165 ms |
+| Checkout | 52.497 | 0 | 11,86 ms | 7 ms | 20 ms | 34 ms | 110 ms | 697 ms |
+| Order history | 52.449 | 0 | 12,89 ms | 7 ms | 24 ms | 38 ms | 117 ms | 355 ms |
+| E2E hoàn chỉnh | 52.447 | 0 | 4.962,63 ms | 4.963 ms | 5.562 ms | 5.727 ms | 6.033 ms | 6.713 ms |
+
+Có 368.046 endpoint sample, 52.447 workflow hoàn chỉnh và 0% lỗi. Ba trăm parent transaction bị cắt tại ranh giới scheduler được loại khỏi E2E hoàn chỉnh. HTML Dashboard ghi nhận throughput endpoint tổng hợp xấp xỉ 409,53 request/giây; throughput workflow hoàn chỉnh là 58,277 workflow/giây. E2E time bao gồm bảy think-time nên không đại diện cho server latency.
+
+### 9.3 Độ ổn định theo thời gian
+
+| Phút | Checkout samples | Checkout RPS | Average | p95 | Working set trung bình | CPU tương đương một core |
+|---:|---:|---:|---:|---:|---:|---:|
+| 1 | 3.648 | 60,8 | 7,1 ms | 13 ms | 87,4 MB | 70,3% |
+| 5 | 3.643 | 60,7 | 7,6 ms | 15 ms | 94,7 MB | 76,0% |
+| 8 | 3.631 | 60,5 | 12,0 ms | 30 ms | 99,2 MB | 91,2% |
+| 10 | 3.624 | 60,4 | 13,0 ms | 33 ms | 100,8 MB | 97,0% |
+| 12 | 3.584 | 59,7 | 16,6 ms | 54 ms | 102,4 MB | 100,4% |
+| 14 | 3.575 | 59,6 | 24,1 ms | 81 ms | 105,9 MB | 106,1% |
+
+Throughput checkout chỉ giảm khoảng 2% từ 60,8 xuống 59,6 request/giây và không có lỗi, nên tải vẫn được phục vụ ổn định. Tuy nhiên p95 tăng từ 13–15 ms lên 81 ms, đồng thời CPU backend tiến đến khoảng một logical core. Đây là degradation theo thời gian ở mức nhẹ nhưng đo được; không nên chỉ nhìn p95 toàn lần chạy 34 ms rồi bỏ qua xu hướng cuối kỳ.
+
+### 9.4 Memory ceiling và endurance threshold
+
+- 901 mẫu tài nguyên trong 913,87 giây.
+- Working set: 44,00 MB ban đầu, cực đại 108,09 MB, còn 55,21 MB sau khi tải kết thúc.
+- Private memory: 54,76 MB ban đầu, cực đại 121,27 MB, còn 66,08 MB cuối cửa sổ giám sát.
+- Trong giai đoạn tải ổn định, working set trung bình tăng từ 87,4 MB ở phút 1 lên 105,9 MB ở phút 14, xấp xỉ 1,4 MB/phút; private memory tăng khoảng 1,2 MB/phút.
+- Backend dùng 765,55 CPU-second trong 913,87 giây, trung bình 83,77% của một logical core; những phút cuối đạt khoảng 100–106% của một core.
+- Thread/handle cực đại: 13/504.
+
+Memory chưa tạo plateau rõ ràng trong lúc 300 VU còn hoạt động, nhưng giảm mạnh ngay sau khi tải kết thúc. Vì vậy có tín hiệu tích lũy tài nguyên cần test lâu hơn, nhưng không đủ bằng chứng để kết luận memory leak. Trên phần cứng này, ngưỡng endurance **đã được chứng minh** là 300 VU, khoảng 409,5 endpoint request/giây và 58,277 workflow/giây trong 15 phút, với 0% lỗi và memory ceiling quan sát được 108,09 MB working set/121,27 MB private memory. Đây là mức sustained cao nhất đã thử, không phải maximum tuyệt đối; muốn tìm maximum phải chạy thêm nhiều bậc 350/400/450 VU trong cùng thời lượng.
+
+Năm ảnh tại `evidence/soak/` ghi lại Statistics, Response Times Over Time, Active Threads Over Time, Transactions Per Second và Task Manager CPU. Raw JTL, HTML Dashboard và CSV tài nguyên nằm tại `results/soak/20260829/`.
 
 ## 10. AI analysis và misinterpretation hunt
 

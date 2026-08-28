@@ -33,7 +33,7 @@ Endpoint-group coverage:
 | Load | `23127414_Load_20260828.jmx` | Summary Report | Completed — 0% errors; screenshots added |
 | Stress | `23127414_Stress_20260828.jmx` | Aggregate Report | Completed — 0% errors; screenshots added |
 | Spike | `23127414_Spike_20260829.jmx` | View Results Tree | Completed — 0% errors; screenshots added |
-| Soak | `23127414_Soak_YYYYMMDD.jmx` | Simple Data Writer + HTML Dashboard | Pending |
+| Soak | `23127414_Soak_20260829.jmx` | Simple Data Writer + HTML Dashboard | Completed — 0% errors; screenshots added |
 
 The date in each official filename will be the actual execution date.
 
@@ -70,6 +70,16 @@ The date in each official filename will be the actual execution date.
 - Checkout p95 recovered to 14 ms in the first 10-second interval after the burst ended.
 - Backend working set peaked at 105.97 MB and fell to 59.52 MB by the end.
 
+### Soak/endurance — 2026-08-29
+
+- Workload: 300 VUs, 60-second ramp-up, 900-second total duration.
+- Complete workflows: 52,447; scheduler-interrupted parents: 300.
+- Endpoint samples: 368,046; failures: 0; error rate: 0%.
+- Observed sustained endpoint throughput: approximately 409.5 requests/s; complete workflow throughput: 58.277/s.
+- All-run checkout p95: 34 ms; minute-level p95 rose from 13–15 ms early to 81 ms in the final sustained minute.
+- Backend working set/private-memory ceilings: 108.09/121.27 MB; final values after load ended: 55.21/66.08 MB.
+- Evidence-supported endurance threshold: 300 VUs and about 409.5 endpoint requests/s for 15 minutes on this host. This is the highest tested stable sustained level, not a proven absolute maximum.
+
 ## Deliverable map
 
 - `test-plans/`: JMeter plans.
@@ -87,7 +97,7 @@ The date in each official filename will be the actual execution date.
 - [x] Load Task Manager screenshot and backend resource CSV.
 - [x] Stress Statistics, response-time, active-thread and Task Manager screenshots plus backend resource CSV.
 - [x] Spike Statistics, active-thread, response-time and Task Manager screenshots plus backend resource CSV.
-- [ ] Soak screenshots and backend resource evidence.
+- [x] Soak Statistics, response-time, active-thread, throughput and Task Manager screenshots plus backend resource CSV.
 - Hardware screenshot (`dxdiag`) with the correct hostname.
 - At least six minutes of unlisted YouTube video with the student's Vietnamese narration.
 - Moodle submission and any account-authenticated GitHub Issue publication.

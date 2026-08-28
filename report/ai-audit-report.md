@@ -86,4 +86,12 @@ I use AI tools for the following tasks.
 - AI output: Validated raw JTL, full-window HTML Dashboard, execution log and 243 backend resource samples; calculated exact percentiles, 10-second checkout windows, recovery time and CPU/memory behavior.
 - Human review and corrections: A 924 ms checkout maximum occurred in a seven-sample startup bucket before the burst, so it was rejected as evidence of spike impact. Recovery was reported as no more than 10 seconds, matching the analysis resolution, rather than claiming an exact instantaneous recovery time. The 510 scheduler-interrupted parent transactions were excluded from completed E2E results and were not misclassified as functional failures.
 
+### Interaction 11 — Clarify and analyse the required endurance/Soak run
+
+- AI tool: OpenAI Codex
+- Date and time: 2026-08-29, after the 01:37–01:52 Soak run.
+- Prompt: The student asked where Soak was required, requested a detailed recording procedure, supplied the completed terminal result and added five screenshots.
+- AI output: Re-read the original PDF and located the explicit 10–15 minute sustained-load requirement; validated the full JTL, HTML, log, 901 backend resource samples and screenshots; calculated exact percentiles, per-minute checkout throughput/latency, CPU utilization and memory growth.
+- Human review and corrections: The observed 300-VU result is described as the highest tested stable sustained level, not an absolute hardware maximum. Zero errors and a 34 ms whole-run checkout p95 were not treated as the whole story: minute-level checkout p95 rose from 13–15 ms to 81 ms while working set grew about 1.4 MB/minute. Memory dropped after load ended, so the result is recorded as a resource-growth signal requiring a longer test, not proof of a memory leak.
+
 > Every later AI interaction used to design plans or analyse logs must be appended with the exact prompt, full output or a durable transcript link, date/time, and the student's correction notes.
