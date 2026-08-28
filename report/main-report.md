@@ -28,15 +28,42 @@ Login → Search/List → Product detail → View cart → Add to cart
 → Checkout → Order history
 ```
 
-_Giải thích ánh xạ auth-heavy, read-heavy và transactional._
+| Nhóm | Bước trong workflow | Lý do |
+|---|---|---|
+| Auth-heavy | `POST /api/login` | Mỗi vòng tạo JWT và tra cứu tài khoản; test dùng tài khoản riêng để không kích hoạt lockout ngoài ý muốn |
+| Read-heavy | `GET /api/products`, `GET /api/products/:id`, `GET /api/cart` | Tìm kiếm, đọc chi tiết và trạng thái giỏ; product ID được correlation từ kết quả tìm kiếm |
+| Transactional | `POST /api/cart`, `POST /api/checkout` | Thay đổi giỏ hàng và ghi đơn hàng SQLite |
+| Verification | `GET /api/orders/my-orders` | Xác nhận `orderId` vừa tạo xuất hiện trong lịch sử, tránh coi HTTP 200 là thành công nghiệp vụ |
+
+Cả Load, Stress, Spike và Soak đều dùng đúng chuỗi bảy request trên. Nhờ vậy khác biệt kết quả phản ánh workload model thay vì thay đổi business flow giữa các scenario.
 
 ## 4. Quy trình thiết kế có AI hỗ trợ và human review
 
-_Ghi prompt theo từng bước, đầu ra AI, lỗi hoặc thiếu sót và cách sửa._
+Quá trình AI-first được chia thành các vòng: đọc đề, chọn workflow, sinh dữ liệu/JMX, smoke, calibration, chạy chính thức, phân tích JTL và challenge kết luận. Chi tiết prompt, thời gian, output và human correction nằm trong `report/ai-audit-report.md`.
+
+| Đầu ra AI ban đầu | Human review | Sửa cuối |
+|---|---|---|
+| CSV sharing mode `Current thread` | Mỗi thread bắt đầu lại từ dòng đầu, làm nhiều VU dùng chung account/cart | `All threads`, outer loop một lần và inner workflow loop |
+| Stress ceiling 200 VU | Calibration 200 VU vẫn 0 lỗi, endpoint p95 chỉ 6–8 ms | Tăng Stress lên 1.000 VU sau calibration 500 VU |
+| Dùng trực tiếp số parent transaction | Parent ở cuối scheduler có thể chưa đủ bảy child sample | Chỉ tính E2E hoàn chỉnh khi response message ghi đủ 7 sample |
+| Tin percentile HTML mặc định | Stress có hơn 20.000 sample/label nên sliding window làm median/p95 lệch raw JTL | Dùng full JTL; đặt `statistic_window=-1` cho Spike/Soak |
+| Có thể gọi CPU là root cause | CPU và latency cùng tăng chỉ tạo correlation | Ghi CPU là bottleneck ứng viên; yêu cầu profiling/A-B test để chứng minh |
+
+Các lỗi kỹ thuật khác được sửa trong smoke gồm tên CLI property có dấu chấm bị Windows batch parse sai và phép nhân Groovy giữa `BigDecimal` với chuỗi CSV. Mỗi giai đoạn được commit riêng, không sửa SUT để làm đẹp kết quả.
 
 ## 5. Dữ liệu kiểm thử và correlation
 
-_Mô tả CSV account pool, JWT extraction, product/order correlation và reset procedure._
+CSV chứa `name,email,password,searchTerm,quantity,shippingAddress`. Load dùng pool 40 tài khoản; Stress 1.200; Spike tách 20 baseline và 600 burst. Soak dùng pool Stress. Mỗi VU lấy một dòng duy nhất và giữ tài khoản đó trong toàn lần chạy vì SUT lưu cart bằng object trong RAM theo user ID.
+
+Correlation theo response thật:
+
+1. Login trích `authToken`, dùng làm Bearer token.
+2. Search trích `productId`, `productPrice`, `productName`.
+3. Cart payload dùng product đã trích và `quantity` từ CSV.
+4. Groovy chuyển cả price/quantity sang `BigDecimal` để tính `total_amount`.
+5. Checkout trích `orderId`; order history phải chứa ID này.
+
+Trước mỗi official run, `Reset-And-Prepare.ps1` chỉ dừng PID backend đã ghi, khởi động clean SUT để tái tạo SQLite, rồi đăng ký 1.860 tài khoản qua API. Restart đồng thời reset `login_attempts/locked_until`. Workflow dùng password đúng; bất kỳ lockout nào đều là lỗi dữ liệu/correlation, không bị bỏ qua.
 
 ## 6. Load test
 
@@ -261,7 +288,13 @@ Stress có 38.974 raw E2E parent nhưng chỉ 37.974 workflow đủ bảy child 
 
 ## 11. Đánh giá đề xuất tối ưu
 
-_Phân loại khả thi, cần bằng chứng thêm hoặc hallucinated._
+Đánh giá chi tiết nằm tại `report/optimization-review.md`. Ba kết luận chính:
+
+1. **Khả thi và ưu tiên:** xóa cart sau checkout; phân trang order history; thêm index `orders(user_id, id DESC)` và index/unique constraint phù hợp cho `users(email)`. Các thay đổi khớp trực tiếp đường đi của workflow và cấu trúc hiện tại.
+2. **Cần benchmark/profiling:** SQLite WAL, cache product list, tối ưu JWT và tách JMeter khỏi máy SUT. Chúng có cơ sở nhưng kết quả hiện tại chưa chứng minh lợi ích hoặc root cause.
+3. **Không phù hợp/hallucinated trong ngữ cảnh:** “thêm connection pool” như với PostgreSQL, bật nhiều Node worker ngay lập tức, hoặc triển khai Redis/Kubernetes mà không sửa cart in-memory và đo lại. Chúng bỏ qua SQLite single-file và state cục bộ của ứng dụng.
+
+Không proposal nào được coi là đúng chỉ vì AI nêu ra. Thứ tự thực nghiệm đề xuất là: sửa cart + pagination/index, chạy lại Load/Stress cùng dữ liệu, sau đó mới A/B test WAL hoặc thay đổi kiến trúc.
 
 ## 12. Continuous Performance Testing
 
@@ -269,8 +302,18 @@ _Phân loại khả thi, cần bằng chứng thêm hoặc hallucinated._
 
 ## 13. Issues phát hiện
 
-_Liên kết GitHub Issues và bằng chứng, nếu có._
+Chưa tạo Issue trên GitHub vì thao tác đó cần tài khoản và quyết định xuất bản của sinh viên. Nội dung sẵn sàng đăng nằm tại `report/github-issue-drafts.md`, gồm:
+
+- performance degradation khoảng 800–900 VU: checkout p95 vượt 500 ms và backend gần một logical core;
+- cart in-memory không được clear sau checkout, phù hợp với xu hướng memory tăng trong Soak;
+- order history trả toàn bộ lịch sử và không có index `(user_id, id)`, làm chi phí tăng theo số vòng.
+
+Không ghi “crash” hoặc “HTTP error” vì bốn official run đều 0% lỗi. Functional deviations đã quan sát từ code (login attempts +2/lock 180 giây, checkout tin `total_amount` client) được ghi là issue candidates, không được trình bày như phát hiện performance đã benchmark.
 
 ## 14. Kết luận
 
-_Tóm tắt ngưỡng phần cứng, bottleneck, hạn chế và hướng cải tiến._
+Workflow E2E hoạt động ổn định ở Load 20 VU và chịu được Spike 10→510 VU với recovery quan sát không quá 10 giây. Stress xác định vùng suy giảm thực dụng khoảng 800–900 VU: checkout p95 từ 255 ms ở vùng cực đại 802 thread tăng lên 698 ms khi tiến đến 1.000, rồi vượt 1 giây khi giữ 1.000 VU. Hệ thống không crash và error rate vẫn 0%, nhưng không đạt tiêu chí p95 500 ms ở tải cao.
+
+Soak chứng minh máy `MINHLUAN` duy trì 300 VU trong 15 phút ở khoảng 409,5 endpoint request/giây và 58,277 workflow/giây, 0% lỗi. Memory ceiling quan sát là 108,09 MB working set/121,27 MB private memory. Throughput chỉ giảm khoảng 2%, nhưng checkout p95 tăng từ 13–15 ms lên 81 ms và memory tăng khi tải còn hoạt động; test dài hơn cần thiết trước khi loại trừ leak.
+
+Bottleneck ứng viên là một logical core của Node.js kết hợp truy vấn/order payload tăng dần và cart in-memory không được clear. Hạn chế gồm JMeter và SUT chạy cùng máy, chỉ một lần official/scenario, Soak chỉ một bậc 300 VU và không có profiler/event-loop lag. Vì vậy kết luận là ngưỡng đã kiểm chứng, không phải công suất tuyệt đối. Hướng tiếp theo: sửa state/cart, pagination + index, profile, rồi chạy A/B trên runner cố định theo pipeline đề xuất.

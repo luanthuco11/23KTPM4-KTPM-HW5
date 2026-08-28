@@ -94,4 +94,12 @@ I use AI tools for the following tasks.
 - AI output: Re-read the original PDF and located the explicit 10–15 minute sustained-load requirement; validated the full JTL, HTML, log, 901 backend resource samples and screenshots; calculated exact percentiles, per-minute checkout throughput/latency, CPU utilization and memory growth.
 - Human review and corrections: The observed 300-VU result is described as the highest tested stable sustained level, not an absolute hardware maximum. Zero errors and a 34 ms whole-run checkout p95 were not treated as the whole story: minute-level checkout p95 rose from 13–15 ms to 81 ms while working set grew about 1.4 MB/minute. Memory dropped after load ended, so the result is recorded as a resource-growth signal requiring a longer test, not proof of a memory leak.
 
+### Interaction 12 — Classify AI optimization proposals against the SUT code
+
+- AI tool: OpenAI Codex
+- Date and time: 2026-08-29, after all official runs completed.
+- Prompt: Continue all remaining report sections while the student will provide the video link later.
+- AI output: Inspected the lecturer baseline schema/routes and classified cart cleanup, pagination/indexes, WAL/cache/runner isolation, connection pooling, Node clustering and distributed infrastructure proposals; prepared issue drafts and final conclusions.
+- Human review and corrections: Recommendations were not accepted by plausibility alone. Cart cleanup and order pagination/indexing map directly to code and measurable trends. WAL/cache require A/B evidence. Generic connection pools, immediate Node clustering and Redis/Kubernetes were rejected as incompatible or unsupported because the current SUT uses one SQLite connection and process-local cart state. CPU remains a correlated bottleneck candidate, not a proven sole cause.
+
 > Every later AI interaction used to design plans or analyse logs must be appended with the exact prompt, full output or a durable transcript link, date/time, and the student's correction notes.
