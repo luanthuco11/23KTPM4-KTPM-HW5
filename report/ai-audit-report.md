@@ -70,4 +70,12 @@ I use AI tools for the following tasks.
 - AI output: Validated the 51 MB raw JTL, HTML Dashboard, JMeter log and 434 backend resource samples; computed endpoint/workflow throughput, percentiles, CPU/memory ranges and minute-level checkout degradation.
 - Human review and corrections: The filename retains campaign ID `20260828`, while raw timestamps prove execution occurred after midnight on 2026-08-29. Zero request errors were not misreported as a successful performance result: endpoint p95 exceeded 500 ms around 800–900 VUs, and 1,000 scheduler-interrupted parent transactions were excluded from complete E2E statistics. CPU saturation is treated as a correlation requiring profiling, not a proven sole root cause.
 
+### Interaction 9 — Review Stress screenshots and challenge Dashboard percentiles
+
+- AI tool: OpenAI Codex
+- Date and time: 2026-08-29, after the student added four Stress screenshots.
+- Prompt: The student reported that the requested Stress screenshots had been added.
+- AI output: Validated Statistics, Response Times Over Time, Active Threads Over Time and Task Manager CPU screenshots; detected that HTML percentiles disagreed with the exact JTL summary despite identical sample counts and averages.
+- Human review and corrections: Local JMeter configuration revealed the default 20,000-sample percentile sliding window. Regenerating a temporary report from the same immutable JTL with `jmeter.reportgenerator.statistic_window=-1` reproduced the exact full-JTL Login median/p95 (223/1,210 ms) and Checkout median/p95 (242/1,289 ms). The official runner was updated for future scenarios; the original Stress HTML and screenshot were preserved as evidence rather than rewritten.
+
 > Every later AI interaction used to design plans or analyse logs must be appended with the exact prompt, full output or a durable transcript link, date/time, and the student's correction notes.

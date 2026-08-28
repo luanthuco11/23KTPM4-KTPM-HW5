@@ -31,7 +31,7 @@ Endpoint-group coverage:
 | Scenario | Test plan | Distinct JMeter report view | Status |
 |---|---|---|---|
 | Load | `23127414_Load_20260828.jmx` | Summary Report | Completed — 0% errors; screenshots added |
-| Stress | `23127414_Stress_20260828.jmx` | Aggregate Report | Completed — 0% errors; screenshots pending |
+| Stress | `23127414_Stress_20260828.jmx` | Aggregate Report | Completed — 0% errors; screenshots added |
 | Spike | `23127414_Spike_YYYYMMDD.jmx` | View Results Tree | Pending |
 | Soak | `23127414_Soak_YYYYMMDD.jmx` | Simple Data Writer + HTML Dashboard | Pending |
 
@@ -76,7 +76,7 @@ The date in each official filename will be the actual execution date.
 - [x] Load HTML Statistics screenshot.
 - [x] Load Response Times Over Time screenshot.
 - [x] Load Task Manager screenshot and backend resource CSV.
-- [ ] Stress screenshots and backend resource evidence.
+- [x] Stress Statistics, response-time, active-thread and Task Manager screenshots plus backend resource CSV.
 - [ ] Spike screenshots and backend resource evidence.
 - [ ] Soak screenshots and backend resource evidence.
 - Hardware screenshot (`dxdiag`) with the correct hostname.

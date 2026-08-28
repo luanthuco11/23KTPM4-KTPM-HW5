@@ -70,7 +70,7 @@ $monitorJob = Start-Job -ArgumentList $backendPid -ScriptBlock {
 try {
     Write-Host "Starting official $Scenario scenario."
     Write-Host 'Keep Task Manager visible beside this terminal and capture the required screenshot/video evidence now.'
-    & $jmeter -n -t $plan "-Jhost=$HostName" "-Jport=$Port" -l $jtl -j $jmeterLog -e -o $htmlDirectory
+    & $jmeter -n -t $plan "-Jhost=$HostName" "-Jport=$Port" '-Jjmeter.reportgenerator.statistic_window=-1' -l $jtl -j $jmeterLog -e -o $htmlDirectory
     if ($LASTEXITCODE -ne 0) {
         throw "JMeter exited with code $LASTEXITCODE."
     }

@@ -136,6 +136,8 @@ Checkout p95 vẫn dưới 500 ms đến vùng khoảng 800 VU, sau đó vượt
 
 Node.js backend gần bão hòa một logical core trong toàn cửa sổ tải cao, phù hợp với độ trễ và throughput suy giảm. Stress test không làm hệ thống crash và error rate vẫn 0%, nhưng đã thất bại tiêu chí hiệu năng p95 500 ms ở vùng tải cao. Kết luận này là correlation từ dữ liệu hiện có, chưa chứng minh CPU là nguyên nhân duy nhất; database, event loop và client-side load generator cần profiling bổ sung để khẳng định quan hệ nhân quả. Raw JTL, HTML Dashboard, log và CSV tài nguyên nằm trong `results/stress/20260828/`.
 
+Bốn ảnh sinh viên cung cấp tại `evidence/stress/` ghi lại Statistics, Response Times Over Time, Active Threads Over Time và Task Manager tab CPU. Ảnh Active Threads xác nhận ramp tăng đến 1.000 VU; ảnh Response Times cho thấy độ trễ tăng đồng thời với tải.
+
 ## 8. Spike test
 
 _Tải nền, mức spike, thời gian hồi phục, ảnh bằng chứng và kết quả._
@@ -146,7 +148,15 @@ _Kết quả chạy 10–15 phút và ngưỡng ổn định trên phần cứng
 
 ## 10. AI analysis và misinterpretation hunt
 
-_Đối chiếu từng nhận định AI với giá trị đúng trong JTL._
+### 10.1 HTML percentile không phải percentile chính xác của toàn bộ Stress JTL
+
+JMeter HTML Dashboard mặc định dùng `jmeter.reportgenerator.statistic_window = 20000`, tức cửa sổ trượt 20.000 mẫu để ước lượng percentile. Mỗi endpoint của Stress có hơn 38.000 mẫu, vì vậy bảng Statistics trong ảnh cho Login median 597 ms và p95 1.485 ms, trong khi tính trên toàn bộ raw JTL cho kết quả lần lượt 223 ms và 1.210 ms. Checkout trên ảnh là median 625 ms, p95 1.595,95 ms; toàn bộ JTL cho 242 ms và 1.289 ms.
+
+Đây không phải dữ liệu raw bị hỏng: average, sample count và error rate của HTML vẫn khớp. Một báo cáo kiểm chứng tạm thời được tạo lại từ chính JTL với `statistic_window=-1` và cho Login median/p95 223/1.210 ms, Checkout 242/1.289 ms, khớp `metric-summary.csv`. Do đó báo cáo dùng full JTL làm nguồn sự thật cho percentile, còn ảnh HTML dùng để chứng minh hình dạng tải và kết quả trực quan. Runner đã được sửa để Spike và Soak dùng toàn bộ mẫu khi tạo HTML.
+
+### 10.2 Parent transaction dang dở không phải lỗi request
+
+Stress có 38.974 raw E2E parent nhưng chỉ 37.974 workflow đủ bảy child request. Nếu chỉ nhìn error rate 0% hoặc throughput parent do Dashboard xuất ra, người đọc có thể nhầm 1.000 transaction bị scheduler cắt là workflow hoàn chỉnh. Phân tích raw JTL loại chúng khỏi p95 và throughput E2E hoàn chỉnh, nhưng không chuyển chúng thành functional failure.
 
 ## 11. Đánh giá đề xuất tối ưu
 

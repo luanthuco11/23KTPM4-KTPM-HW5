@@ -1,14 +1,20 @@
 # Stress visual evidence
 
-Add the real screenshots or video stills captured during the official Stress run
-here. Do not add AI-generated or reconstructed screenshots.
+These are real screenshots supplied by the student after the official Stress run.
+They are not AI-generated or reconstructed.
 
-Required evidence:
+| File | Evidence shown |
+|---|---|
+| `image.png` | JMeter HTML Dashboard — Statistics table |
+| `image copy.png` | JMeter HTML Dashboard — Response Times Over Time |
+| `image copy 2.png` | JMeter HTML Dashboard — Active Threads Over Time, showing the ramp to 1,000 VUs |
+| `image copy 3.png` | Windows Task Manager — CPU graph, processor model, 6 cores/12 logical processors and memory summary |
 
-- JMeter terminal or HTML Dashboard showing the Stress scenario/result.
-- Windows Task Manager with the CPU tab selected and CPU graph readable.
-- Memory view if captured.
-- Prefer a frame recorded during the high-load portion, not only after completion.
+The Statistics screenshot uses JMeter's default 20,000-sample sliding window for
+percentile estimation. Therefore its percentile values differ from the exact full-JTL
+values in `metric-summary.csv`; sample counts, averages and error rates remain valid.
+The report documents this distinction instead of silently treating the screenshot
+percentiles as exact.
 
 The automatic backend process record is already stored at
 `results/stress/20260828/backend-resource-usage.csv`.
