@@ -1,0 +1,17 @@
+flowchart TD
+    A["Commit hoặc Pull Request mới"] --> B["Phân tích file và dependency thay đổi"]
+    B --> C{"Có khả năng ảnh hưởng hiệu năng?"}
+    C -- "Không: chỉ docs/UI tĩnh" --> D["Bỏ qua performance test và ghi lý do"]
+    C -- "Có: backend/DB/API/dependency/config" --> E["Dựng runner cố định và reset SQLite"]
+    E --> F["Chạy smoke workflow"]
+    F --> G{"Assertion và error rate đạt?"}
+    G -- "Không" --> H["Fail pipeline và lưu JTL/HTML/log"]
+    G -- "Có" --> I["Chạy Load test 3 lần"]
+    I --> J["Lấy median p95, throughput và error rate"]
+    J --> K["So sánh với baseline cùng runner"]
+    K --> L{"p95 tăng >20% và >50 ms, hoặc error rate ≥1%?"}
+    L -- "Có" --> M["Đánh dấu regression; chặn merge; đính kèm artifact"]
+    L -- "Không" --> N["Pass; lưu kết quả làm lịch sử"]
+    N --> O{"Nhánh main và baseline hợp lệ?"}
+    O -- "Có phê duyệt" --> P["Cập nhật baseline có phiên bản"]
+    O -- "Không" --> Q["Giữ baseline hiện tại"]

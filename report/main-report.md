@@ -300,6 +300,8 @@ Không proposal nào được coi là đúng chỉ vì AI nêu ra. Thứ tự th
 
 Đề xuất đầy đủ và flowchart nằm tại `report/continuous-performance-testing.md`. Mô hình sử dụng smoke + Load test có chọn lọc trên Pull Request, ba lần chạy để lấy median p95, và Stress/Spike/Soak theo lịch hoặc trước release. Regression được đánh dấu khi p95 tăng hơn 20% đồng thời lệch tuyệt đối trên 50 ms, error rate từ 1%, hoặc throughput giảm trên 15%.
 
+![Flowchart Continuous Performance Testing](continuous-performance-testing-flowchart.png)
+
 ## 13. Issues phát hiện
 
 Chưa tạo Issue trên GitHub vì thao tác đó cần tài khoản và quyết định xuất bản của sinh viên. Nội dung sẵn sàng đăng nằm tại `report/github-issue-drafts.md`, gồm:

@@ -26,6 +26,8 @@ flowchart TD
     O -- "Không" --> Q["Giữ baseline hiện tại"]
 ```
 
+![Flowchart Continuous Performance Testing](continuous-performance-testing-flowchart.png)
+
 ## 3. Chính sách quyết định chạy
 
 ### Chạy trên Pull Request
@@ -109,4 +111,3 @@ Biện pháp:
 ## 9. Kết luận
 
 Mô hình phù hợp nhất cho EShop là chiến lược hai tầng: smoke + Load có chọn lọc trên Pull Request, còn Stress/Spike/Soak chạy định kỳ hoặc trước release. Baseline phải gắn với runner cố định và không được cập nhật tự động từ kết quả regression. Cách này cân bằng khả năng phát hiện sớm với chi phí và nguy cơ cảnh báo giả.
-
