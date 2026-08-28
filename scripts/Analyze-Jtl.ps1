@@ -32,17 +32,30 @@ function Get-Percentile {
 }
 
 $summary = foreach ($group in ($rows | Group-Object label | Sort-Object Name)) {
-    $elapsedValues = @($group.Group | ForEach-Object { [long]$_.elapsed })
-    $start = ($group.Group | Measure-Object -Property timeStamp -Minimum).Minimum
-    $end = ($group.Group | ForEach-Object { [long]$_.timeStamp + [long]$_.elapsed } | Measure-Object -Maximum).Maximum
+    $rawSamples = @($group.Group)
+    if ($group.Name -eq 'E2E Purchase Workflow') {
+        $analysisSamples = @($rawSamples | Where-Object { $_.responseMessage -match 'Number of samples in transaction\s*:\s*7' })
+    } else {
+        $analysisSamples = $rawSamples
+    }
+
+    if ($analysisSamples.Count -eq 0) {
+        continue
+    }
+
+    $elapsedValues = @($analysisSamples | ForEach-Object { [long]$_.elapsed })
+    $start = ($analysisSamples | Measure-Object -Property timeStamp -Minimum).Minimum
+    $end = ($analysisSamples | ForEach-Object { [long]$_.timeStamp + [long]$_.elapsed } | Measure-Object -Maximum).Maximum
     $wallSeconds = [math]::Max(0.001, ([double]$end - [double]$start) / 1000.0)
-    $failures = @($group.Group | Where-Object { $_.success -ne 'true' }).Count
+    $failures = @($analysisSamples | Where-Object { $_.success -ne 'true' }).Count
 
     [PSCustomObject]@{
         Label        = $group.Name
-        Samples      = $group.Count
+        RawSamples   = $rawSamples.Count
+        Samples      = $analysisSamples.Count
+        Interrupted  = $rawSamples.Count - $analysisSamples.Count
         Failures     = $failures
-        ErrorRatePct = [math]::Round(($failures * 100.0) / $group.Count, 3)
+        ErrorRatePct = [math]::Round(($failures * 100.0) / $analysisSamples.Count, 3)
         AverageMs    = [math]::Round(($elapsedValues | Measure-Object -Average).Average, 2)
         MinMs        = ($elapsedValues | Measure-Object -Minimum).Minimum
         P50Ms        = Get-Percentile -Values $elapsedValues -Percentile 0.50
@@ -50,7 +63,7 @@ $summary = foreach ($group in ($rows | Group-Object label | Sort-Object Name)) {
         P95Ms        = Get-Percentile -Values $elapsedValues -Percentile 0.95
         P99Ms        = Get-Percentile -Values $elapsedValues -Percentile 0.99
         MaxMs        = ($elapsedValues | Measure-Object -Maximum).Maximum
-        ThroughputRps = [math]::Round($group.Count / $wallSeconds, 3)
+        ThroughputRps = [math]::Round($analysisSamples.Count / $wallSeconds, 3)
     }
 }
 
@@ -64,4 +77,3 @@ if ($OutputCsv) {
     $summary | Export-Csv -LiteralPath $OutputCsv -NoTypeInformation -Encoding utf8
     Write-Host "Summary written to $OutputCsv"
 }
-

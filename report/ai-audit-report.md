@@ -54,4 +54,12 @@ I use AI tools for the following tasks.
 - AI output: Commit-change decision flow, three-run median p95 comparison, regression gates, baseline governance, artifact policy, false-alarm controls, and cost trade-offs.
 - Human review: The proposal uses both a relative and absolute p95 threshold so small millisecond changes are not incorrectly flagged as large percentage regressions. Baseline updates require a reviewed `main` result and never occur automatically from a failing candidate.
 
+### Interaction 7 — Analyse the official Load result
+
+- AI tool: OpenAI Codex
+- Date and time: 2026-08-28, after the 20:43–20:48 Load run.
+- Prompt: The student reported that the official Load script had finished and asked what to do next.
+- AI output: Validated JTL, HTML Dashboard, JMeter log, metric summary, and 301 backend resource samples; calculated percentiles, throughput, and memory range; proposed the Load report section.
+- Human review and corrections: Raw JTL contained 1,112 E2E parent samples, but only 1,092 included all seven child requests. Twenty parent transactions were interrupted at the scheduler boundary and were excluded from completed-workflow p95 and throughput. E2E latency was also explicitly separated from backend latency because it includes configured think time.
+
 > Every later AI interaction used to design plans or analyse logs must be appended with the exact prompt, full output or a durable transcript link, date/time, and the student's correction notes.

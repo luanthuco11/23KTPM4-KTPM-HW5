@@ -30,12 +30,25 @@ Endpoint-group coverage:
 
 | Scenario | Test plan | Distinct JMeter report view | Status |
 |---|---|---|---|
-| Load | `23127414_Load_YYYYMMDD.jmx` | Summary Report | Pending |
+| Load | `23127414_Load_20260828.jmx` | Summary Report | Completed — 0% errors |
 | Stress | `23127414_Stress_YYYYMMDD.jmx` | Aggregate Report | Pending |
 | Spike | `23127414_Spike_YYYYMMDD.jmx` | View Results Tree | Pending |
 | Soak | `23127414_Soak_YYYYMMDD.jmx` | Simple Data Writer + HTML Dashboard | Pending |
 
 The date in each official filename will be the actual execution date.
+
+## Current official result summary
+
+### Load — 2026-08-28
+
+- Workload: 20 VUs, 60-second ramp-up, 300-second duration.
+- Complete workflows: 1,092; interrupted at scheduler boundary: 20.
+- Endpoint samples: 7,715; failures: 0; error rate: 0%.
+- Completed workflow throughput: 3.642 workflows/s.
+- Approximate endpoint throughput: 25.7 requests/s.
+- Checkout p95: 17 ms; login p95: 6 ms.
+- E2E p95: 5,628 ms, including seven configured think-time delays.
+- Backend working set: 45.75 MB initially, 83.75 MB maximum.
 
 ## Deliverable map
 

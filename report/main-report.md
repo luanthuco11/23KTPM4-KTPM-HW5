@@ -40,7 +40,51 @@ _Mô tả CSV account pool, JWT extraction, product/order correlation và reset 
 
 ## 6. Load test
 
-_Tham số, lý do lựa chọn, ảnh bằng chứng, kết quả, p50/p90/p95/p99, throughput, error rate và tài nguyên._
+### 6.1 Cấu hình và mục tiêu
+
+- Test plan: `23127414_Load_20260828.jmx`.
+- Virtual users: 20.
+- Ramp-up: 60 giây.
+- Tổng thời gian: 300 giây, từ 20:43:15 đến 20:48:15 ngày 28/08/2026.
+- Think time: phân phối đều ngẫu nhiên 400–1000 ms trước mỗi request.
+- Report view: Summary Report; kết quả chính thức được chạy bằng CLI và xuất thêm HTML Dashboard.
+
+Mục tiêu của Load test là kiểm tra workflow đầy đủ dưới mức tải ổn định đã được calibration trước đó. Tiêu chí tạm thời là error rate dưới 1% và p95 của từng endpoint dưới 500 ms.
+
+### 6.2 Kết quả
+
+| Label | Samples | Failures | Average | p50 | p90 | p95 | p99 | Max |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Login | 1.110 | 0 | 3,41 ms | 3 ms | 5 ms | 6 ms | 10 ms | 52 ms |
+| Search products | 1.108 | 0 | 1,98 ms | 2 ms | 3 ms | 4 ms | 6 ms | 17 ms |
+| Product detail | 1.105 | 0 | 1,97 ms | 2 ms | 3 ms | 3 ms | 7 ms | 19 ms |
+| View cart | 1.104 | 0 | 2,37 ms | 2 ms | 4 ms | 4 ms | 6 ms | 16 ms |
+| Add to cart | 1.099 | 0 | 2,48 ms | 2 ms | 4 ms | 4 ms | 5 ms | 15 ms |
+| Checkout | 1.097 | 0 | 8,03 ms | 6 ms | 15 ms | 17 ms | 19 ms | 684 ms |
+| Order history | 1.092 | 0 | 3,35 ms | 3 ms | 5 ms | 6 ms | 9 ms | 15 ms |
+| E2E hoàn chỉnh | 1.092 | 0 | 4.918,34 ms | 4.933 ms | 5.504 ms | 5.628 ms | 5.919 ms | 6.250 ms |
+
+Tổng cộng có 7.715 endpoint sample, tương đương khoảng 25,7 request/giây. Hệ thống hoàn thành 1.092 workflow, tương đương 3,642 workflow/giây, với error rate 0%. Checkout có một outlier 684 ms nhưng p99 chỉ 19 ms, vì vậy outlier này không đại diện cho phần lớn request và cần theo dõi tiếp trong Stress/Soak thay vì kết luận bottleneck từ một mẫu.
+
+### 6.3 Human review đối với parent transaction
+
+Raw JTL chứa 1.112 parent sample `E2E Purchase Workflow`, nhưng chỉ 1.092 sample có thông báo đủ bảy request. Hai mươi sample còn lại tương ứng 20 thread đang ở giữa vòng lặp khi scheduler kết thúc. Chúng không phải functional failure nhưng cũng không phải workflow hoàn chỉnh. Vì vậy báo cáo sử dụng 1.092 làm mẫu số E2E và throughput 3,642 workflow/giây, không dùng trực tiếp con số 1.112 mà công cụ có thể tổng hợp.
+
+E2E p95 bao gồm bảy think-time delay, nên không được diễn giải là server latency. Chỉ số này đo thời gian trải nghiệm toàn workflow mô phỏng; p95 endpoint mới phù hợp để đánh giá phản hồi backend.
+
+### 6.4 Tài nguyên backend
+
+- Số mẫu tài nguyên: 301.
+- Working set: từ 45,75 MB lên 82,70 MB; cực đại 83,75 MB.
+- Private memory: từ 54,30 MB lên 97,57 MB; cực đại 98,90 MB.
+- Backend dùng thêm 19,92 CPU-second trong khoảng giám sát 304,69 giây.
+- Thread backend cực đại: 14.
+
+Memory tăng trong Load test có thể do số đơn hàng và dữ liệu runtime tích lũy; một lần chạy 5 phút chưa đủ để gọi đây là memory leak. Soak test sẽ kiểm tra liệu mức sử dụng có đạt plateau hay tiếp tục tăng không giới hạn.
+
+### 6.5 Kết luận Load
+
+Load test đạt tiêu chí tạm thời: 0% lỗi và tất cả endpoint p95 thấp hơn 20 ms. Với 20 VU, SUT ổn định; chưa có bằng chứng về saturation. Bằng chứng thô và HTML report nằm trong `results/load/20260828/`.
 
 ## 7. Stress test
 
