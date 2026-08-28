@@ -9,7 +9,17 @@
 
 ## 2. Môi trường kiểm thử
 
-_Điền bảng CPU, RAM, hệ điều hành, Java, Node.js, hostname và ảnh dxdiag._
+| Thành phần | Thông số |
+|---|---|
+| Hostname | `MINHLUAN` |
+| CPU | Intel Core i5-11400H, 6 nhân/12 luồng, 2.70 GHz |
+| RAM | 15.77 GB |
+| Hệ điều hành | Windows 11 Home Single Language, 10.0.26200 |
+| Java | OpenJDK 21.0.11 LTS |
+| Node.js | v22.16.0 |
+| JMeter | 5.6.3 |
+
+_Cần bổ sung ảnh dxdiag có cùng hostname và ảnh Task Manager trong từng lần chạy._
 
 ## 3. Workflow và phạm vi endpoint
 
@@ -63,4 +73,3 @@ _Liên kết GitHub Issues và bằng chứng, nếu có._
 ## 14. Kết luận
 
 _Tóm tắt ngưỡng phần cứng, bottleneck, hạn chế và hướng cải tiến._
-
