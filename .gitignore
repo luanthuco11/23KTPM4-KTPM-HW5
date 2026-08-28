@@ -1,0 +1,13 @@
+# Local tools and the clean reference SUT are reproducible and are not submitted.
+.tools/
+eshop-sut/
+
+# Local runtime state.
+*.pid
+*.log
+runtime/
+
+# Generated archives and temporary files.
+*.zip
+*.tmp
+
