@@ -22,3 +22,6 @@ f3cca5e | 2026-08-29T02:02:13+07:00 | test: record official soak endurance resul
 8bf77ec | 2026-08-29T02:07:14+07:00 | docs: complete AI analysis and optimization review
 25f81c4 | 2026-08-29T02:08:21+07:00 | docs: complete mandatory AI critique
 4e251db | 2026-08-29T02:11:18+07:00 | feat: add reusable EShop performance testing skill
+851a008 | 2026-08-29T02:13:15+07:00 | docs: add submission checklist and commit log
+443a55e | 2026-08-29T02:17:09+07:00 | docs: embed continuous testing flowchart
+b402499 | 2026-08-29T02:18:08+07:00 | docs: add final video review guide
