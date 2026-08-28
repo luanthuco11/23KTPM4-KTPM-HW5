@@ -110,4 +110,12 @@ I use AI tools for the following tasks.
 - AI output: Drafted a Vietnamese critique grounded in the verified Dashboard sliding-window error, incomplete parent transactions, correlation-versus-causation risk and architecture-incompatible optimization proposals.
 - Human review and corrections: The paragraph was measured at 284 whitespace-delimited words, cites the correct full-JTL values, explains why the mistakes occurred, and states the learned human-review principle. It is included both as a standalone deliverable and in the main report.
 
+### Interaction 14 — Build and validate the reusable Agent Skill
+
+- AI tool: OpenAI Codex with the system `skill-creator` skill.
+- Date and time: 2026-08-29.
+- Prompt: Continue the remaining homework sections, including the Agent Skill criterion.
+- AI output: Created `agent-skills/eshop-performance-testing/` with scoped workflow guidance, UI metadata and a configurable PowerShell JTL analyzer; ran structural validation and a realistic forward-test.
+- Human review and corrections: The skill avoids generic advice and encodes demonstrated failure modes without making them universal. `quick_validate.py` reported `Skill is valid!`. Running its analyzer against official Stress evidence reproduced Login p95 1,210 ms, Checkout p95 1,289 ms, 37,974 complete parents and 1,000 interrupted parents. The video demonstration remains a student-recorded requirement.
+
 > Every later AI interaction used to design plans or analyse logs must be appended with the exact prompt, full output or a durable transcript link, date/time, and the student's correction notes.

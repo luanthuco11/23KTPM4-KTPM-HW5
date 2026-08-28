@@ -89,6 +89,7 @@ The date in each official filename will be the actual execution date.
 - `report/`: main report, AI audit, AI critique, and continuous-testing proposal.
 - `scripts/`: repeatable preparation, execution, and analysis helpers.
 - `docs/`: project plan and SUT baseline notes.
+- `agent-skills/eshop-performance-testing/`: reusable, validated Agent Skill and exact JTL analyzer.
 
 ## Evidence checklist
 
@@ -98,6 +99,8 @@ The date in each official filename will be the actual execution date.
 - [x] Stress Statistics, response-time, active-thread and Task Manager screenshots plus backend resource CSV.
 - [x] Spike Statistics, active-thread, response-time and Task Manager screenshots plus backend resource CSV.
 - [x] Soak Statistics, response-time, active-thread, throughput and Task Manager screenshots plus backend resource CSV.
+- [x] Agent Skill implementation and validation on the official Stress JTL.
+- [ ] Agent Skill demonstration segment in the unlisted video.
 - Hardware screenshot (`dxdiag`) with the correct hostname.
 - At least six minutes of unlisted YouTube video with the student's Vietnamese narration.
 - Moodle submission and any account-authenticated GitHub Issue publication.
