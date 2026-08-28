@@ -1,0 +1,24 @@
+9ea5884 | 2026-08-14T23:37:45+07:00 | first commit
+207835c | 2026-08-28T19:53:10+07:00 | docs: scaffold HW5 performance testing project
+bc804f9 | 2026-08-28T19:56:57+07:00 | test: add isolated performance test data setup
+d89b707 | 2026-08-28T20:06:31+07:00 | test: design correlated JMeter workflow
+a940c51 | 2026-08-28T20:06:42+07:00 | test: add validated load test plan
+c6a1710 | 2026-08-28T20:06:42+07:00 | test: add validated stress test plan
+643cb51 | 2026-08-28T20:06:42+07:00 | test: add validated spike test plan
+2548769 | 2026-08-28T20:08:55+07:00 | test: record smoke validation and run tooling
+87ce520 | 2026-08-28T20:08:55+07:00 | docs: record performance test environment
+9198a4a | 2026-08-28T20:22:30+07:00 | test: recalibrate stress and spike workloads
+8ec46e0 | 2026-08-28T20:22:30+07:00 | test: add validated soak test plan
+9dae140 | 2026-08-28T20:24:56+07:00 | docs: propose continuous performance testing model
+1d8462e | 2026-08-28T20:40:54+07:00 | fix: avoid PowerShell web parsing prompt
+ddc111f | 2026-08-28T20:52:20+07:00 | test: record official load test results
+8dbdecb | 2026-08-28T20:59:03+07:00 | docs: add official load test screenshots
+e0ae031 | 2026-08-29T00:58:03+07:00 | test: record official stress test results
+3207fb0 | 2026-08-29T01:03:20+07:00 | docs: add stress evidence and verify percentiles
+f3daab2 | 2026-08-29T01:04:28+07:00 | test: prepare dated spike and soak plans
+5e97d53 | 2026-08-29T01:16:28+07:00 | test: record official spike test results
+82e8704 | 2026-08-29T01:21:31+07:00 | docs: normalize performance evidence filenames
+f3cca5e | 2026-08-29T02:02:13+07:00 | test: record official soak endurance results
+8bf77ec | 2026-08-29T02:07:14+07:00 | docs: complete AI analysis and optimization review
+25f81c4 | 2026-08-29T02:08:21+07:00 | docs: complete mandatory AI critique
+4e251db | 2026-08-29T02:11:18+07:00 | feat: add reusable EShop performance testing skill

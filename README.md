@@ -3,7 +3,23 @@
 - Student ID: `23127414`
 - SUT: EShop (`ttbhanh/eshop-sut`)
 - Tool: Apache JMeter 5.6.3
-- Status: In progress
+- Status: Technical work complete; awaiting student `dxdiag` and unlisted-video evidence
+- Public repository: `https://github.com/luanthuco11/23KTPM4-KTPM-HW5`
+- Proposed submission filename after evidence is added: `23127414_HW05_AI_Performance_090.zip`
+
+## Self-assessment
+
+| No. | Criterion | Maximum | Self-assessed |
+|---:|---|---:|---:|
+| 1 | Task 1 — Load testing | 20 | 20 |
+| 2 | Task 1 — Stress testing | 20 | 20 |
+| 3 | Task 1 — Spike testing | 20 | 20 |
+| 4 | Task 2 — AI analysis and misinterpretation hunt | 10 | 10 |
+| 5 | Task 3 — Continuous Performance Testing proposal | 10 | 10 |
+| 6 | Agent Skill | 10 | 10, conditional on adding the recorded skill-demo segment |
+| | Total of listed rubric rows | 90 | 90 |
+
+The assignment template prints `Total 100`, although its six published row weights sum to 90. The proposed three-digit self-assessed grade is therefore `090`; the student should confirm this interpretation before final submission.
 
 ## Selected workflow
 
@@ -35,7 +51,7 @@ Endpoint-group coverage:
 | Spike | `23127414_Spike_20260829.jmx` | View Results Tree | Completed — 0% errors; screenshots added |
 | Soak | `23127414_Soak_20260829.jmx` | Simple Data Writer + HTML Dashboard | Completed — 0% errors; screenshots added |
 
-The date in each official filename will be the actual execution date.
+The suffix identifies the execution campaign. Load uses `20260828`; Spike and Soak use their actual date `20260829`. Stress retained campaign suffix `20260828` although immutable JTL timestamps show it started after midnight on `2026-08-29`; this discrepancy is documented rather than rewriting evidence.
 
 ## Current official result summary
 
@@ -101,9 +117,22 @@ The date in each official filename will be the actual execution date.
 - [x] Soak Statistics, response-time, active-thread, throughput and Task Manager screenshots plus backend resource CSV.
 - [x] Agent Skill implementation and validation on the official Stress JTL.
 - [ ] Agent Skill demonstration segment in the unlisted video.
-- Hardware screenshot (`dxdiag`) with the correct hostname.
-- At least six minutes of unlisted YouTube video with the student's Vietnamese narration.
-- Moodle submission and any account-authenticated GitHub Issue publication.
+- [x] Hardware specification table for host `MINHLUAN`.
+- [ ] Hardware screenshot (`dxdiag`) with hostname `MINHLUAN`.
+- [ ] At least six minutes of unlisted YouTube video with the student's Vietnamese narration.
+- [ ] Add the unlisted URL to `evidence/video-link.txt` and this README.
+- [ ] Push/merge the completed branch to the public repository.
+- [ ] Moodle submission.
+- [ ] Optional: publish any selected draft from `report/github-issue-drafts.md` and add its URL.
+
+## Submission summary
+
+- Scenarios run: Load, Stress, Spike, plus the required 15-minute Soak/endurance run.
+- Endpoint groups: auth-heavy, read-heavy, transactional, plus order-history verification.
+- Evidence-supported endurance threshold: 300 VUs, approximately 409.5 endpoint requests/s and 58.277 complete workflows/s for 15 minutes, with 0% errors.
+- Practical Stress degradation threshold: approximately 800–900 VUs under the tested linear ramp.
+- Published bugs/performance issues: 0; prepared evidence-backed Issue drafts: 3.
+- Demo video: pending student upload.
 
 ## Source baseline
 

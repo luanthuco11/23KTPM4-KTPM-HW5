@@ -28,7 +28,7 @@ I use AI tools for the following tasks.
 - Date and time: 2026-08-28 19:51 +07:00
 - Prompt: Begin the work, ask for decisions when necessary, create a plan first, use student ID 23127414, JMeter, and a clean SUT from the lecturer repository; commit every stage.
 - AI output: Staged implementation plan; clean SUT baseline; JMeter installation; API smoke-test findings; initial report and audit templates.
-- Human review: Pending review of the first committed stage.
+- Human review: The scaffold and clean-baseline decision were accepted; later smoke/calibration stages corrected the initial workload and data-sharing assumptions.
 
 ### Interaction 4 — Design data-driven JMeter plans
 
@@ -117,5 +117,22 @@ I use AI tools for the following tasks.
 - Prompt: Continue the remaining homework sections, including the Agent Skill criterion.
 - AI output: Created `agent-skills/eshop-performance-testing/` with scoped workflow guidance, UI metadata and a configurable PowerShell JTL analyzer; ran structural validation and a realistic forward-test.
 - Human review and corrections: The skill avoids generic advice and encodes demonstrated failure modes without making them universal. `quick_validate.py` reported `Skill is valid!`. Running its analyzer against official Stress evidence reproduced Login p95 1,210 ms, Checkout p95 1,289 ms, 37,974 complete parents and 1,000 interrupted parents. The video demonstration remains a student-recorded requirement.
+
+## Durable AI outputs and review trail
+
+The AI outputs are preserved as reviewable text/code artifacts rather than pasted as an unbounded chat transcript:
+
+| Interactions | Durable output | Review commit(s) |
+|---|---|---|
+| 1–3 | `README.md`, `docs/00-project-plan.md`, `docs/01-sut-baseline.md`, initial report/audit structure | `207835c` |
+| 4 | `docs/02-data-and-reset-procedure.md`, `docs/03-test-design.md`, `scripts/`, `test-plans/` | `bc804f9`–`2548769` |
+| 5 | `docs/05-calibration.md`, recalibrated JMX files | `9198a4a`, `8ec46e0` |
+| 6 | `report/continuous-performance-testing.md` | `9dae140` |
+| 7–11 | Immutable official `results/`, real `evidence/`, exact summaries and report sections | `ddc111f`–`f3cca5e` |
+| 12 | `report/optimization-review.md`, `report/github-issue-drafts.md`, completed conclusions | `8bf77ec` |
+| 13 | `report/ai-critique.md` and section 15 of the main report | `25f81c4` |
+| 14 | `agent-skills/eshop-performance-testing/` | `4e251db` |
+
+`docs/git-commit-log.txt` supplies timestamps and subjects for the staged review history. The original conversational task remains available in Codex; the repository artifacts are the stable submission record.
 
 > Every later AI interaction used to design plans or analyse logs must be appended with the exact prompt, full output or a durable transcript link, date/time, and the student's correction notes.
