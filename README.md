@@ -105,6 +105,7 @@ The suffix identifies the execution campaign. Load uses `20260828`; Spike and So
 - `report/`: main report, AI audit, AI critique, and continuous-testing proposal.
 - `scripts/`: repeatable preparation, execution, and analysis helpers.
 - `docs/`: project plan and SUT baseline notes.
+- `docs/video-demo-guide.md`: detailed Vietnamese narration/demo sequence for the required video.
 - `agent-skills/eshop-performance-testing/`: reusable, validated Agent Skill and exact JTL analyzer.
 
 ## Evidence checklist

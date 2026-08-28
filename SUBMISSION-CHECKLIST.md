@@ -24,10 +24,11 @@
 - [ ] Add a real `dxdiag` screenshot showing hostname `MINHLUAN` to `evidence/hardware/`.
 - [ ] Finish the Vietnamese-narrated video (at least six minutes total).
 - [ ] Include a short Agent Skill/analyzer demonstration segment in that video.
+- [x] Prepare the detailed recording script in `docs/video-demo-guide.md`.
 - [ ] Upload as YouTube Unlisted and add the URL to `evidence/video-link.txt` and `README.md`.
 - [ ] Decide whether to publish any draft in `report/github-issue-drafts.md`; add real Issue URLs only if published.
 - [ ] Push or merge `codex/hw5-performance-testing` to the public GitHub repository.
-- [ ] Re-export final PDFs after the video URL and dxdiag evidence are added.
+- [ ] Review the Markdown and convert the final documents to PDF after the video URL and dxdiag evidence are added.
 - [ ] Build the final `23127414_HW05_AI_Performance_090.zip` and inspect its contents.
 - [ ] Submit the ZIP to Moodle.
 
