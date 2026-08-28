@@ -46,4 +46,12 @@ I use AI tools for the following tasks.
 - AI output: Short calibration executions at 20, 100, 200, and 500 VUs plus a 500-VU spike; JTL percentile summaries and revised workload proposal.
 - Human review and corrections: The original 200-VU Stress ceiling was rejected because p95 remained approximately 8 ms with no errors. At 500 VUs, checkout p95 reached 198 ms and the 500-VU spike reached 393 ms. The Stress ceiling was raised to 1,000 VUs and the Spike burst to 500 VUs. Calibration logs are not treated as official evidence.
 
+### Interaction 6 — Propose continuous performance testing
+
+- AI tool: OpenAI Codex
+- Date: 2026-08-28
+- Prompt: Continue the homework and complete the independent Continuous Performance Testing task.
+- AI output: Commit-change decision flow, three-run median p95 comparison, regression gates, baseline governance, artifact policy, false-alarm controls, and cost trade-offs.
+- Human review: The proposal uses both a relative and absolute p95 threshold so small millisecond changes are not incorrectly flagged as large percentage regressions. Baseline updates require a reviewed `main` result and never occur automatically from a failing candidate.
+
 > Every later AI interaction used to design plans or analyse logs must be appended with the exact prompt, full output or a durable transcript link, date/time, and the student's correction notes.

@@ -64,7 +64,7 @@ _Phân loại khả thi, cần bằng chứng thêm hoặc hallucinated._
 
 ## 12. Continuous Performance Testing
 
-_Mô hình theo dõi commit, điều kiện chạy, so sánh p95, flowchart, chi phí và false alarms._
+Đề xuất đầy đủ và flowchart nằm tại `report/continuous-performance-testing.md`. Mô hình sử dụng smoke + Load test có chọn lọc trên Pull Request, ba lần chạy để lấy median p95, và Stress/Spike/Soak theo lịch hoặc trước release. Regression được đánh dấu khi p95 tăng hơn 20% đồng thời lệch tuyệt đối trên 50 ms, error rate từ 1%, hoặc throughput giảm trên 15%.
 
 ## 13. Issues phát hiện
 
