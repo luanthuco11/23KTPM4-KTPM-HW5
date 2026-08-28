@@ -84,7 +84,7 @@ Memory tăng trong Load test có thể do số đơn hàng và dữ liệu runti
 
 ### 6.5 Kết luận Load
 
-Load test đạt tiêu chí tạm thời: 0% lỗi và tất cả endpoint p95 thấp hơn 20 ms. Với 20 VU, SUT ổn định; chưa có bằng chứng về saturation. Bằng chứng thô và HTML report nằm trong `results/load/20260828/`.
+Load test đạt tiêu chí tạm thời: 0% lỗi và tất cả endpoint p95 thấp hơn 20 ms. Với 20 VU, SUT ổn định; chưa có bằng chứng về saturation. Bằng chứng thô và HTML report nằm trong `results/load/20260828/`. Ba ảnh do sinh viên cung cấp tại `evidence/load/` ghi lại bảng Statistics, biểu đồ Response Times Over Time và Task Manager; chuỗi mẫu tài nguyên backend trong suốt lần chạy nằm tại `results/load/20260828/backend-resource-usage.csv`.
 
 ## 7. Stress test
 

@@ -1,13 +1,15 @@
 # Load visual evidence
 
-Add the real screenshots or video stills captured during the official Load run here.
+These are real screenshots supplied by the student after the official Load run on
+2026-08-28. They are not AI-generated or reconstructed.
 
-Required image content:
+| File | Evidence shown |
+|---|---|
+| `image.png` | JMeter HTML Dashboard — Statistics table, including samples, failures, percentiles and throughput |
+| `image copy.png` | JMeter HTML Dashboard — Response Times Over Time |
+| `image copy 2.png` | Windows Task Manager — Performance view; CPU and memory summaries are visible in the left pane |
 
-- JMeter/terminal visibly running the Load scenario.
-- Task Manager visible in the same frame.
-- CPU and memory/resource information readable.
-- No AI-generated or reconstructed screenshots.
-
-Recommended filename: `23127414_Load_20260828_TaskManager.png`.
-
+The backend resource samples captured during the run are stored separately in
+`results/load/20260828/backend-resource-usage.csv`. The screenshot and CSV are
+complementary: the screenshot identifies the host state, while the CSV preserves
+the backend process measurements throughout the run.
