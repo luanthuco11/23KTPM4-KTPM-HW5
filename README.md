@@ -33,7 +33,7 @@ Endpoint-group coverage:
 | Load | `23127414_Load_YYYYMMDD.jmx` | Summary Report | Pending |
 | Stress | `23127414_Stress_YYYYMMDD.jmx` | Aggregate Report | Pending |
 | Spike | `23127414_Spike_YYYYMMDD.jmx` | View Results Tree | Pending |
-| Soak | Supporting plan/log | HTML Dashboard | Pending |
+| Soak | `23127414_Soak_YYYYMMDD.jmx` | Simple Data Writer + HTML Dashboard | Pending |
 
 The date in each official filename will be the actual execution date.
 

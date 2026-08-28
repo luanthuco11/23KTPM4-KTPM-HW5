@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory)]
-    [ValidateSet('Load', 'Stress', 'Spike')]
+    [ValidateSet('Load', 'Stress', 'Spike', 'Soak')]
     [string]$Scenario,
 
     [string]$ExecutionDate = (Get-Date -Format 'yyyyMMdd'),
@@ -86,4 +86,3 @@ try {
 
 & (Join-Path $PSScriptRoot 'Analyze-Jtl.ps1') -JtlPath $jtl -OutputCsv $summaryCsv
 Write-Host "Official $Scenario artifacts created in $resultDirectory"
-
