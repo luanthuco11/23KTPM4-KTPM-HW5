@@ -191,6 +191,8 @@ Burst làm checkout p95 tăng từ khoảng 19 ms lên cực đại có ý nghĩ
 
 Hệ thống hấp thụ spike 10→510 VU mà không có lỗi, p95 endpoint vẫn dưới 500 ms và độ trễ checkout trở lại baseline trong không quá 10 giây sau burst. Memory không trở lại đúng mức ban đầu nhưng đã giảm mạnh từ đỉnh 105,97 MB xuống 59,52 MB; kết quả này phù hợp với thu hồi bộ nhớ sau burst và chưa đủ để kết luận memory leak. Raw JTL, HTML Dashboard và CSV tài nguyên nằm trong `results/spike/20260829/`.
 
+Bốn ảnh tại `evidence/spike/` ghi lại Statistics, bước nhảy trên Active Threads Over Time, Response Times Over Time và Task Manager tab CPU. Tất cả ảnh Load, Stress và Spike đã được chuẩn hóa tên theo MSSV, scenario, ngày chạy/campaign và loại bằng chứng để có thể truy vết trực tiếp.
+
 ## 9. Endurance/soak test
 
 _Kết quả chạy 10–15 phút và ngưỡng ổn định trên phần cứng thực tế._

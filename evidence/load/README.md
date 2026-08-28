@@ -5,9 +5,9 @@ These are real screenshots supplied by the student after the official Load run o
 
 | File | Evidence shown |
 |---|---|
-| `image.png` | JMeter HTML Dashboard — Statistics table, including samples, failures, percentiles and throughput |
-| `image copy.png` | JMeter HTML Dashboard — Response Times Over Time |
-| `image copy 2.png` | Windows Task Manager — Performance view; CPU and memory summaries are visible in the left pane |
+| `23127414_Load_20260828_Statistics.png` | JMeter HTML Dashboard — Statistics table, including samples, failures, percentiles and throughput |
+| `23127414_Load_20260828_ResponseTimesOverTime.png` | JMeter HTML Dashboard — Response Times Over Time |
+| `23127414_Load_20260828_TaskManagerPerformance.png` | Windows Task Manager — Performance view; CPU and memory summaries are visible in the left pane |
 
 The backend resource samples captured during the run are stored separately in
 `results/load/20260828/backend-resource-usage.csv`. The screenshot and CSV are

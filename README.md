@@ -32,7 +32,7 @@ Endpoint-group coverage:
 |---|---|---|---|
 | Load | `23127414_Load_20260828.jmx` | Summary Report | Completed — 0% errors; screenshots added |
 | Stress | `23127414_Stress_20260828.jmx` | Aggregate Report | Completed — 0% errors; screenshots added |
-| Spike | `23127414_Spike_20260829.jmx` | View Results Tree | Completed — 0% errors; screenshots pending |
+| Spike | `23127414_Spike_20260829.jmx` | View Results Tree | Completed — 0% errors; screenshots added |
 | Soak | `23127414_Soak_YYYYMMDD.jmx` | Simple Data Writer + HTML Dashboard | Pending |
 
 The date in each official filename will be the actual execution date.
@@ -86,7 +86,7 @@ The date in each official filename will be the actual execution date.
 - [x] Load Response Times Over Time screenshot.
 - [x] Load Task Manager screenshot and backend resource CSV.
 - [x] Stress Statistics, response-time, active-thread and Task Manager screenshots plus backend resource CSV.
-- [ ] Spike screenshots; backend resource CSV is complete.
+- [x] Spike Statistics, active-thread, response-time and Task Manager screenshots plus backend resource CSV.
 - [ ] Soak screenshots and backend resource evidence.
 - Hardware screenshot (`dxdiag`) with the correct hostname.
 - At least six minutes of unlisted YouTube video with the student's Vietnamese narration.
