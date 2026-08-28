@@ -31,7 +31,7 @@ Endpoint-group coverage:
 | Scenario | Test plan | Distinct JMeter report view | Status |
 |---|---|---|---|
 | Load | `23127414_Load_20260828.jmx` | Summary Report | Completed — 0% errors; screenshots added |
-| Stress | `23127414_Stress_YYYYMMDD.jmx` | Aggregate Report | Pending |
+| Stress | `23127414_Stress_20260828.jmx` | Aggregate Report | Completed — 0% errors; screenshots pending |
 | Spike | `23127414_Spike_YYYYMMDD.jmx` | View Results Tree | Pending |
 | Soak | `23127414_Soak_YYYYMMDD.jmx` | Simple Data Writer + HTML Dashboard | Pending |
 
@@ -49,6 +49,17 @@ The date in each official filename will be the actual execution date.
 - Checkout p95: 17 ms; login p95: 6 ms.
 - E2E p95: 5,628 ms, including seven configured think-time delays.
 - Backend working set: 45.75 MB initially, 83.75 MB maximum.
+
+### Stress — campaign ID 20260828, executed 2026-08-29
+
+- Workload: linear ramp to 1,000 VUs over 300 seconds; 420-second scheduler duration.
+- Complete workflows: 37,974; interrupted at scheduler boundary: 1,000.
+- Endpoint samples: 270,095; failures: 0; error rate: 0%.
+- Approximate endpoint throughput: 613.4 requests/s over the resource-monitoring window.
+- Login p95: 1,210 ms; checkout p95: 1,289 ms; order-history p95: 1,428 ms.
+- E2E p95: 10,389 ms, including seven configured think-time delays.
+- Backend reached approximately one logical CPU core and 161.72 MB working set.
+- Practical degradation threshold: approximately 800–900 VUs; the system did not crash but exceeded the provisional 500 ms endpoint p95 objective.
 
 ## Deliverable map
 

@@ -62,4 +62,12 @@ I use AI tools for the following tasks.
 - AI output: Validated JTL, HTML Dashboard, JMeter log, metric summary, and 301 backend resource samples; calculated percentiles, throughput, and memory range; proposed the Load report section.
 - Human review and corrections: Raw JTL contained 1,112 E2E parent samples, but only 1,092 included all seven child requests. Twenty parent transactions were interrupted at the scheduler boundary and were excluded from completed-workflow p95 and throughput. E2E latency was also explicitly separated from backend latency because it includes configured think time.
 
+### Interaction 8 — Analyse the official Stress result
+
+- AI tool: OpenAI Codex
+- Date and time: 2026-08-29, after the 00:46–00:53 Stress run.
+- Prompt: The student supplied the completed Stress terminal output and asked to continue the staged homework process.
+- AI output: Validated the 51 MB raw JTL, HTML Dashboard, JMeter log and 434 backend resource samples; computed endpoint/workflow throughput, percentiles, CPU/memory ranges and minute-level checkout degradation.
+- Human review and corrections: The filename retains campaign ID `20260828`, while raw timestamps prove execution occurred after midnight on 2026-08-29. Zero request errors were not misreported as a successful performance result: endpoint p95 exceeded 500 ms around 800–900 VUs, and 1,000 scheduler-interrupted parent transactions were excluded from complete E2E statistics. CPU saturation is treated as a correlation requiring profiling, not a proven sole root cause.
+
 > Every later AI interaction used to design plans or analyse logs must be appended with the exact prompt, full output or a durable transcript link, date/time, and the student's correction notes.
