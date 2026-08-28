@@ -78,4 +78,12 @@ I use AI tools for the following tasks.
 - AI output: Validated Statistics, Response Times Over Time, Active Threads Over Time and Task Manager CPU screenshots; detected that HTML percentiles disagreed with the exact JTL summary despite identical sample counts and averages.
 - Human review and corrections: Local JMeter configuration revealed the default 20,000-sample percentile sliding window. Regenerating a temporary report from the same immutable JTL with `jmeter.reportgenerator.statistic_window=-1` reproduced the exact full-JTL Login median/p95 (223/1,210 ms) and Checkout median/p95 (242/1,289 ms). The official runner was updated for future scenarios; the original Stress HTML and screenshot were preserved as evidence rather than rewritten.
 
+### Interaction 10 — Analyse the official Spike result
+
+- AI tool: OpenAI Codex
+- Date and time: 2026-08-29, after the 01:09–01:13 Spike run.
+- Prompt: The student supplied the completed Spike terminal output.
+- AI output: Validated raw JTL, full-window HTML Dashboard, execution log and 243 backend resource samples; calculated exact percentiles, 10-second checkout windows, recovery time and CPU/memory behavior.
+- Human review and corrections: A 924 ms checkout maximum occurred in a seven-sample startup bucket before the burst, so it was rejected as evidence of spike impact. Recovery was reported as no more than 10 seconds, matching the analysis resolution, rather than claiming an exact instantaneous recovery time. The 510 scheduler-interrupted parent transactions were excluded from completed E2E results and were not misclassified as functional failures.
+
 > Every later AI interaction used to design plans or analyse logs must be appended with the exact prompt, full output or a durable transcript link, date/time, and the student's correction notes.

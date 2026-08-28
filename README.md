@@ -32,7 +32,7 @@ Endpoint-group coverage:
 |---|---|---|---|
 | Load | `23127414_Load_20260828.jmx` | Summary Report | Completed — 0% errors; screenshots added |
 | Stress | `23127414_Stress_20260828.jmx` | Aggregate Report | Completed — 0% errors; screenshots added |
-| Spike | `23127414_Spike_YYYYMMDD.jmx` | View Results Tree | Pending |
+| Spike | `23127414_Spike_20260829.jmx` | View Results Tree | Completed — 0% errors; screenshots pending |
 | Soak | `23127414_Soak_YYYYMMDD.jmx` | Simple Data Writer + HTML Dashboard | Pending |
 
 The date in each official filename will be the actual execution date.
@@ -61,6 +61,15 @@ The date in each official filename will be the actual execution date.
 - Backend reached approximately one logical CPU core and 161.72 MB working set.
 - Practical degradation threshold: approximately 800–900 VUs; the system did not crash but exceeded the provisional 500 ms endpoint p95 objective.
 
+### Spike — 2026-08-29
+
+- Workload: 10 baseline VUs for 240 seconds, plus 500 VUs ramped in 5 seconds at t=60 seconds and held for 60 seconds.
+- Complete workflows: 5,953; scheduler-interrupted parents: 510.
+- Endpoint samples: 43,270; failures: 0; error rate: 0%.
+- Checkout p95 over the whole run: 94 ms; worst meaningful 10-second burst p95: 210 ms.
+- Checkout p95 recovered to 14 ms in the first 10-second interval after the burst ended.
+- Backend working set peaked at 105.97 MB and fell to 59.52 MB by the end.
+
 ## Deliverable map
 
 - `test-plans/`: JMeter plans.
@@ -77,7 +86,7 @@ The date in each official filename will be the actual execution date.
 - [x] Load Response Times Over Time screenshot.
 - [x] Load Task Manager screenshot and backend resource CSV.
 - [x] Stress Statistics, response-time, active-thread and Task Manager screenshots plus backend resource CSV.
-- [ ] Spike screenshots and backend resource evidence.
+- [ ] Spike screenshots; backend resource CSV is complete.
 - [ ] Soak screenshots and backend resource evidence.
 - Hardware screenshot (`dxdiag`) with the correct hostname.
 - At least six minutes of unlisted YouTube video with the student's Vietnamese narration.

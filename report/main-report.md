@@ -5,7 +5,7 @@
 - MSSV: `23127414`
 - Công cụ: Apache JMeter 5.6.3
 - SUT baseline: `85af3ba875c88283615e22cb108f13e2fccaf0e9`
-- Ngày chạy chính thức: 28–29/08/2026 (Load và Stress đã hoàn thành)
+- Ngày chạy chính thức: 28–29/08/2026 (Load, Stress và Spike đã hoàn thành)
 
 ## 2. Môi trường kiểm thử
 
@@ -140,7 +140,56 @@ Bốn ảnh sinh viên cung cấp tại `evidence/stress/` ghi lại Statistics,
 
 ## 8. Spike test
 
-_Tải nền, mức spike, thời gian hồi phục, ảnh bằng chứng và kết quả._
+### 8.1 Cấu hình và mục tiêu
+
+- Test plan: `23127414_Spike_20260829.jmx`.
+- Thời gian: 01:09:44–01:13:45 ngày 29/08/2026.
+- Baseline: 10 VU, ramp 10 giây, chạy 240 giây.
+- Burst: thêm 500 VU tại giây 60, ramp chỉ 5 giây và duy trì 60 giây.
+- Tổng tải cực đại: 510 VU.
+- Report view trong test plan: View Results Tree; lần chạy chính thức dùng CLI và HTML Dashboard.
+- Mục tiêu: đo mức tăng độ trễ tức thời và thời gian hệ thống trở lại baseline sau khi burst kết thúc.
+
+### 8.2 Kết quả tổng hợp
+
+| Label | Samples | Failures | Average | p50 | p90 | p95 | p99 | Max |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Login | 6.400 | 0 | 19,90 ms | 7 ms | 52 ms | 92 ms | 187 ms | 293 ms |
+| Search products | 6.324 | 0 | 18,43 ms | 6 ms | 51 ms | 85 ms | 196 ms | 298 ms |
+| Product detail | 6.265 | 0 | 18,61 ms | 6 ms | 52 ms | 88 ms | 181 ms | 285 ms |
+| View cart | 6.184 | 0 | 9,14 ms | 3 ms | 25 ms | 41 ms | 89 ms | 130 ms |
+| Add to cart | 6.114 | 0 | 9,41 ms | 3 ms | 24 ms | 43 ms | 96 ms | 132 ms |
+| Checkout | 6.029 | 0 | 22,99 ms | 10 ms | 55 ms | 94 ms | 206 ms | 924 ms |
+| Order history | 5.954 | 0 | 21,38 ms | 8 ms | 59 ms | 97 ms | 211 ms | 285 ms |
+| E2E hoàn chỉnh | 5.953 | 0 | 5.021,11 ms | 5.016 ms | 5.639 ms | 5.820 ms | 6.100 ms | 6.442 ms |
+
+Toàn bộ lần chạy có 43.270 endpoint sample và 5.953 workflow hoàn chỉnh. Có 510 parent E2E bị scheduler cắt khi các thread burst và baseline kết thúc; chúng được loại khỏi percentile E2E nhưng không được tính thành request failure. Error rate endpoint là 0%.
+
+### 8.3 Tác động của burst và khả năng hồi phục
+
+| Khoảng thời gian | Active threads | Checkout samples | Checkout average | Checkout p95 |
+|---|---:|---:|---:|---:|
+| 50–59 giây, trước burst | trung bình 10, cực đại 15 | 21 | 9,2 ms | 19 ms |
+| 60–69 giây | trung bình 501, cực đại 510 | 602 | 34,8 ms | 86 ms |
+| 70–79 giây | 510 | 994 | 38,2 ms | 210 ms |
+| 80–89 giây | 510 | 1.027 | 11,6 ms | 31 ms |
+| 90–99 giây | 510 | 1.037 | 9,6 ms | 22 ms |
+| 100–109 giây | 510 | 1.021 | 25,0 ms | 131 ms |
+| 110–119 giây | trung bình 495, cực đại 510 | 986 | 28,4 ms | 119 ms |
+| 120–129 giây, burst kết thúc | trung bình 19, cực đại 68 | 28 | 7,0 ms | 14 ms |
+| 130–139 giây, baseline | 10 | 21 | 9,9 ms | 19 ms |
+
+Burst làm checkout p95 tăng từ khoảng 19 ms lên cực đại có ý nghĩa 210 ms ở cửa sổ 70–79 giây, nhưng vẫn dưới tiêu chí tạm thời 500 ms. Ngay cửa sổ 10 giây đầu sau khi burst kết thúc, p95 đã trở về 14 ms và cửa sổ kế tiếp là 19 ms; vì vậy recovery time quan sát được là không quá 10 giây theo độ phân giải phân tích. Mẫu checkout 924 ms ở 0–9 giây là một outlier trong chỉ 7 mẫu khởi động, xuất hiện trước burst và không được dùng để quy nguyên nhân cho spike.
+
+### 8.4 Tài nguyên backend và kết luận
+
+- 243 mẫu trong 246,07 giây.
+- Working set: 44,74 MB ban đầu, cực đại 105,97 MB, còn 59,52 MB cuối lần chạy.
+- Private memory: 56,54 MB ban đầu, cực đại 118,36 MB, còn 69,21 MB cuối lần chạy.
+- Burst 60 giây tiêu thụ xấp xỉ 60 CPU-second, tương đương trung bình khoảng một logical core; cửa sổ 10 giây cao nhất đạt khoảng 119% của một logical core.
+- Số thread backend cực đại: 14.
+
+Hệ thống hấp thụ spike 10→510 VU mà không có lỗi, p95 endpoint vẫn dưới 500 ms và độ trễ checkout trở lại baseline trong không quá 10 giây sau burst. Memory không trở lại đúng mức ban đầu nhưng đã giảm mạnh từ đỉnh 105,97 MB xuống 59,52 MB; kết quả này phù hợp với thu hồi bộ nhớ sau burst và chưa đủ để kết luận memory leak. Raw JTL, HTML Dashboard và CSV tài nguyên nằm trong `results/spike/20260829/`.
 
 ## 9. Endurance/soak test
 
