@@ -45,7 +45,7 @@ for ($attempt = 1; $attempt -le 30; $attempt++) {
     }
 
     try {
-        $response = Invoke-WebRequest -Uri "http://localhost:$Port/api/products" -TimeoutSec 2
+        $response = Invoke-WebRequest -Uri "http://localhost:$Port/api/products" -TimeoutSec 2 -UseBasicParsing
         if ($response.StatusCode -eq 200) {
             $ready = $true
             break
@@ -64,4 +64,3 @@ if (-not $ready) {
 
 Write-Host "SUT backend ready at http://localhost:$Port (PID $($process.Id))."
 Write-Host 'The SQLite database has been recreated from the lecturer seed.'
-

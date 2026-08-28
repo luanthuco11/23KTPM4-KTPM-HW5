@@ -35,7 +35,7 @@ if (Test-Path -LiteralPath $resultDirectory) {
     throw "Result directory already exists. Refusing to overwrite official evidence: $resultDirectory"
 }
 
-$health = Invoke-WebRequest -Uri "http://$HostName`:$Port/api/products" -TimeoutSec 5
+$health = Invoke-WebRequest -Uri "http://$HostName`:$Port/api/products" -TimeoutSec 5 -UseBasicParsing
 if ($health.StatusCode -ne 200) {
     throw "SUT health check failed with HTTP $($health.StatusCode)."
 }
