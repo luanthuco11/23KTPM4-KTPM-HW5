@@ -33,8 +33,9 @@ These values are starting hypotheses, not final hardware thresholds. They will b
 | Scenario | Model | Duration | Purpose |
 |---|---|---:|---|
 | Load | 20 VUs ramped over 60 seconds | 5 minutes | Validate stable expected traffic |
-| Stress | Linear ramp to 200 VUs over 240 seconds | 6 minutes | Find saturation and failure onset |
-| Spike | 10-VU baseline plus 100 VUs in 5 seconds at t=60s | 4 minutes | Observe sudden-load degradation and recovery |
+| Stress | Linear ramp to 1,000 VUs over 300 seconds | 7 minutes | Find saturation and failure onset |
+| Spike | 10-VU baseline plus 500 VUs in 5 seconds at t=60s | 4 minutes | Observe sudden-load degradation and recovery |
+| Soak | 300 sustained VUs ramped over 60 seconds | 15 minutes | Check sustained stability and resource growth |
 
 A uniform random think time of 400–1000 ms applies before each request. This creates variation and prevents perfectly synchronized request loops.
 
@@ -48,9 +49,22 @@ A uniform random think time of 400–1000 ms applies before each request. This c
 6. **Report-view overhead recognized.** The three required GUI listeners are distinct, but official measurements are executed in CLI mode and preserved in raw JTL plus HTML dashboards. View Results Tree is used only for the short Spike scenario because it retains detailed samples and can consume client memory.
 7. **CLI override correction.** Dotted property names were parsed incorrectly by the Windows batch launcher (`load.threads` became property `load` with value `.threads=...`). Scenario override keys were changed to underscore form such as `load_threads`.
 8. **Checkout calculation correction.** The first Groovy expression multiplied a `BigDecimal` by an unconverted string from CSV. Both operands are now explicitly converted to `BigDecimal` before calculating `total_amount`.
+9. **Stress intensity correction.** Calibration at 100 and 200 VUs produced no errors and almost no latency increase. The final stress ceiling was raised to 1,000 VUs; a 500-VU calibration already showed a clear p95 increase, so the higher ramp is justified as a search for the actual break point.
 
 ## Distinct report views
 
 - Load: Summary Report.
 - Stress: Aggregate Report.
 - Spike: View Results Tree.
+
+The supporting Soak plan uses Simple Data Writer and does not alter the three distinct required views.
+
+## Provisional stability criteria
+
+A load level is treated as stable only when all of the following hold:
+
+- Error rate is below 1%.
+- Endpoint p95 is below 500 ms.
+- Backend memory does not show sustained unbounded growth.
+- Throughput does not collapse as concurrency increases.
+- After a spike, endpoint p95 and active threads return toward the pre-spike baseline.

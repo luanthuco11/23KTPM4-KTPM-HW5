@@ -38,4 +38,12 @@ I use AI tools for the following tasks.
 - AI output: Proposed workload parameters, CSV pools, JWT/product/order correlation, assertions, reset scripts, and three distinct report views.
 - Human review and corrections: The initial CSV `Current thread` sharing suggestion was found to reuse the first record in every thread. The design was corrected to `All threads`, one outer iteration, and an inner repeated workflow so each virtual user retains one unique account. Smoke testing also found that dotted CLI property names were parsed incorrectly on Windows and that a Groovy checkout calculation had not converted both CSV operands. Both issues were corrected. Final workload values remain hypotheses until calibration runs.
 
+### Interaction 5 — Calibrate workload intensity
+
+- AI tool: OpenAI Codex
+- Date: 2026-08-28
+- Prompt: Continue implementing and validate whether the proposed Load, Stress, and Spike parameters create the intended workload on the student's hardware.
+- AI output: Short calibration executions at 20, 100, 200, and 500 VUs plus a 500-VU spike; JTL percentile summaries and revised workload proposal.
+- Human review and corrections: The original 200-VU Stress ceiling was rejected because p95 remained approximately 8 ms with no errors. At 500 VUs, checkout p95 reached 198 ms and the 500-VU spike reached 393 ms. The Stress ceiling was raised to 1,000 VUs and the Spike burst to 500 VUs. Calibration logs are not treated as official evidence.
+
 > Every later AI interaction used to design plans or analyse logs must be appended with the exact prompt, full output or a durable transcript link, date/time, and the student's correction notes.

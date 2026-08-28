@@ -15,7 +15,7 @@ function Write-ScenarioCsv {
         [string]$Name,
 
         [Parameter(Mandatory)]
-        [ValidateRange(1, 1000)]
+        [ValidateRange(1, 2000)]
         [int]$Count
     )
 
@@ -37,7 +37,6 @@ function Write-ScenarioCsv {
 }
 
 Write-ScenarioCsv -Name 'Load' -Count 40
-Write-ScenarioCsv -Name 'Stress' -Count 250
+Write-ScenarioCsv -Name 'Stress' -Count 1200
 Write-ScenarioCsv -Name 'Spike-Baseline' -Count 20
-Write-ScenarioCsv -Name 'Spike-Burst' -Count 150
-
+Write-ScenarioCsv -Name 'Spike-Burst' -Count 600

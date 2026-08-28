@@ -323,17 +323,21 @@ $listener
 $loadGroup = New-ThreadGroupXml -Name 'Load — 20 VUs' -Threads 20 -RampSeconds 60 -DurationSeconds 300 -DelaySeconds 0 -CsvFile 'data/users-load.csv' -PropertyPrefix 'load'
 $loadPlan = New-TestPlanXml -Scenario 'Load' -ThreadGroupsXml $loadGroup -ListenerName 'Summary Report' -ListenerGuiClass 'SummaryReport'
 
-$stressGroup = New-ThreadGroupXml -Name 'Stress — ramp to 200 VUs' -Threads 200 -RampSeconds 240 -DurationSeconds 360 -DelaySeconds 0 -CsvFile 'data/users-stress.csv' -PropertyPrefix 'stress'
+$stressGroup = New-ThreadGroupXml -Name 'Stress — ramp to 1000 VUs' -Threads 1000 -RampSeconds 300 -DurationSeconds 420 -DelaySeconds 0 -CsvFile 'data/users-stress.csv' -PropertyPrefix 'stress'
 $stressPlan = New-TestPlanXml -Scenario 'Stress' -ThreadGroupsXml $stressGroup -ListenerName 'Aggregate Report' -ListenerGuiClass 'StatVisualizer'
 
 $spikeBaseline = New-ThreadGroupXml -Name 'Spike baseline — 10 VUs' -Threads 10 -RampSeconds 10 -DurationSeconds 240 -DelaySeconds 0 -CsvFile 'data/users-spike-baseline.csv' -PropertyPrefix 'spike.baseline'
-$spikeBurst = New-ThreadGroupXml -Name 'Spike burst — add 100 VUs' -Threads 100 -RampSeconds 5 -DurationSeconds 60 -DelaySeconds 60 -CsvFile 'data/users-spike-burst.csv' -PropertyPrefix 'spike.burst'
+$spikeBurst = New-ThreadGroupXml -Name 'Spike burst — add 500 VUs' -Threads 500 -RampSeconds 5 -DurationSeconds 60 -DelaySeconds 60 -CsvFile 'data/users-spike-burst.csv' -PropertyPrefix 'spike.burst'
 $spikePlan = New-TestPlanXml -Scenario 'Spike' -ThreadGroupsXml ($spikeBaseline + $spikeBurst) -ListenerName 'View Results Tree' -ListenerGuiClass 'ViewResultsFullVisualizer'
+
+$soakGroup = New-ThreadGroupXml -Name 'Soak — 300 sustained VUs' -Threads 300 -RampSeconds 60 -DurationSeconds 900 -DelaySeconds 0 -CsvFile 'data/users-stress.csv' -PropertyPrefix 'soak'
+$soakPlan = New-TestPlanXml -Scenario 'Soak' -ThreadGroupsXml $soakGroup -ListenerName 'Simple Data Writer' -ListenerGuiClass 'SimpleDataWriter'
 
 $plans = @{
     "23127414_Load_$ExecutionDate.jmx"   = $loadPlan
     "23127414_Stress_$ExecutionDate.jmx" = $stressPlan
     "23127414_Spike_$ExecutionDate.jmx"  = $spikePlan
+    "23127414_Soak_$ExecutionDate.jmx"   = $soakPlan
 }
 
 foreach ($entry in $plans.GetEnumerator()) {
