@@ -2,7 +2,7 @@
 
 ## Why isolated accounts are required
 
-The SUT stores carts in memory and keys them by authenticated user ID. Reusing one account across concurrent JMeter threads would combine multiple virtual users into one cart and invalidate workflow measurements. The plans therefore set `Sharing mode = Current thread` and consume a unique CSV row per virtual user.
+The SUT stores carts in memory and keys them by authenticated user ID. Reusing one account across concurrent JMeter threads would combine multiple virtual users into one cart and invalidate workflow measurements. The plans therefore set `Sharing mode = All threads`, run the outer thread-group loop once, and repeat the workflow inside a nested loop. Each virtual user consumes one unique CSV row and retains it for the run.
 
 ## CSV fields
 
@@ -41,4 +41,3 @@ Restarting the backend also resets `login_attempts` and `locked_until`. This is 
 ```
 
 Runtime PID and log files are local-only and excluded from Git.
-

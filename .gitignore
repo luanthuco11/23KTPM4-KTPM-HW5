@@ -6,8 +6,8 @@ eshop-sut/
 *.pid
 *.log
 runtime/
+results/smoke/
 
 # Generated archives and temporary files.
 *.zip
 *.tmp
-

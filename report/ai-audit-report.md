@@ -30,5 +30,12 @@ I use AI tools for the following tasks.
 - AI output: Staged implementation plan; clean SUT baseline; JMeter installation; API smoke-test findings; initial report and audit templates.
 - Human review: Pending review of the first committed stage.
 
-> Every later AI interaction used to design plans or analyse logs must be appended with the exact prompt, full output or a durable transcript link, date/time, and the student's correction notes.
+### Interaction 4 — Design data-driven JMeter plans
 
+- AI tool: OpenAI Codex
+- Date: 2026-08-28
+- Prompt: Continue implementing the confirmed workflow with JMeter and commit every stage.
+- AI output: Proposed workload parameters, CSV pools, JWT/product/order correlation, assertions, reset scripts, and three distinct report views.
+- Human review and corrections: The initial CSV `Current thread` sharing suggestion was found to reuse the first record in every thread. The design was corrected to `All threads`, one outer iteration, and an inner repeated workflow so each virtual user retains one unique account. Smoke testing also found that dotted CLI property names were parsed incorrectly on Windows and that a Groovy checkout calculation had not converted both CSV operands. Both issues were corrected. Final workload values remain hypotheses until calibration runs.
+
+> Every later AI interaction used to design plans or analyse logs must be appended with the exact prompt, full output or a durable transcript link, date/time, and the student's correction notes.
