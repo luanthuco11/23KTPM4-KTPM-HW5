@@ -5,21 +5,22 @@
 - Tool: Apache JMeter 5.6.3
 - Status: Technical work and evidence complete; awaiting final review, packaging and submission
 - Public repository: `https://github.com/luanthuco11/23KTPM4-KTPM-HW5`
-- Proposed submission filename after evidence is added: `23127414_HW05_AI_Performance_090.zip`
+- Proposed submission filename: `23127414_HW05_AI_Performance_100.zip`
 
 ## Self-assessment
 
-| No. | Criterion | Maximum | Self-assessed |
-|---:|---|---:|---:|
-| 1 | Task 1 — Load testing | 20 | 20 |
-| 2 | Task 1 — Stress testing | 20 | 20 |
-| 3 | Task 1 — Spike testing | 20 | 20 |
-| 4 | Task 2 — AI analysis and misinterpretation hunt | 10 | 10 |
-| 5 | Task 3 — Continuous Performance Testing proposal | 10 | 10 |
-| 6 | Agent Skill | 10 | 10 |
-| | Total of listed rubric rows | 90 | 90 |
+| No. | Criterion                                        | Maximum | Self-assessed |
+| --: | ------------------------------------------------ | ------: | ------------: |
+|   1 | Task 1 — Load testing                            |      20 |            20 |
+|   2 | Task 1 — Stress testing                          |      20 |            20 |
+|   3 | Task 1 — Spike testing                           |      20 |            20 |
+|   4 | Task 2 — AI analysis and misinterpretation hunt  |      10 |            10 |
+|   5 | Task 3 — Continuous Performance Testing proposal |      10 |            10 |
+|   6 | Agent Skill                                      |      10 |            10 |
+|     | Total of listed rubric rows                      |      90 |            90 |
+|     | Normalized self-assessed grade                   |     100 |           100 |
 
-The assignment template prints `Total 100`, although its six published row weights sum to 90. The proposed three-digit self-assessed grade is therefore `090`; the student should confirm this interpretation before final submission.
+The assignment template prints `Total 100`, although its six published row weights sum to 90. Because all published criteria are complete (90/90), the final self-assessed grade is normalized to `100/100` and the three-digit filename grade is `100`.
 
 ## Selected workflow
 

@@ -29,7 +29,7 @@
 - [ ] Decide whether to publish any draft in `report/github-issue-drafts.md`; add real Issue URLs only if published.
 - [x] Fast-forward merge `codex/hw5-performance-testing` into `main` and push to the public GitHub repository.
 - [ ] Review the completed Markdown and convert the final documents to PDF.
-- [ ] Build the final `23127414_HW05_AI_Performance_090.zip` and inspect its contents.
+- [ ] Build the final `23127414_HW05_AI_Performance_100.zip` and inspect its contents.
 - [ ] Submit the ZIP to Moodle.
 
 Do not fabricate, reconstruct or AI-generate the missing screenshot, narration, video link or Issue URL.
