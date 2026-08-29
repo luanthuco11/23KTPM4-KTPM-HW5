@@ -19,7 +19,7 @@
 | Node.js | v22.16.0 |
 | JMeter | 5.6.3 |
 
-_Đã có ảnh JMeter Dashboard và Task Manager cho từng lần chạy; cần bổ sung ảnh dxdiag có cùng hostname._
+_Ảnh JMeter Dashboard và Task Manager của từng lần chạy đã được lưu cùng ảnh `dxdiag` xác nhận hostname `MINHLUAN` tại `evidence/hardware/`._
 
 ## 3. Workflow và phạm vi endpoint
 
@@ -329,3 +329,10 @@ Trong bài này, AI hữu ích khi xây dựng nhanh cấu trúc JMeter, sinh CS
 Skill tái sử dụng nằm tại `agent-skills/eshop-performance-testing/`. Skill hướng dẫn quy trình inspect SUT, cô lập CSV account, correlation/assertion, calibration, bảo toàn evidence, phân tích parent transaction và challenge đề xuất tối ưu. Analyzer `scripts/Analyze-Jtl.ps1` bên trong skill nhận `ParentLabel` và `ExpectedChildSamples`, nên có thể dùng cho endpoint group/workflow khác thay vì hard-code bài này.
 
 Skill đã qua `quick_validate.py` của skill-creator. Forward-test trên official Stress JTL tái tạo đúng Login p95 1.210 ms, Checkout p95 1.289 ms, 37.974 E2E hoàn chỉnh và 1.000 parent bị scheduler cắt. Video tổng cần có một đoạn ngắn hiển thị việc gọi skill/analyzer và giải thích bốn giá trị này để đáp ứng phần demonstration video của tiêu chí Agent Skill.
+
+## 17. Video và hardware evidence
+
+- Video thuyết minh tiếng Việt (06:05): https://youtu.be/GMl2YKZG3M0
+- Video truy cập được và đạt yêu cầu tối thiểu 6 phút; sinh viên cần tự bảo đảm visibility được đặt là **Unlisted** trước khi nộp.
+- Ảnh `dxdiag`: `evidence/hardware/23127414_Hardware_DxDiag_MINHLUAN.png`.
+- Đoạn demo Agent Skill sẽ được sinh viên quay riêng; link chưa được bổ sung tại thời điểm hoàn thiện bản Markdown này.

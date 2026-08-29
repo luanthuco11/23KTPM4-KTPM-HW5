@@ -15,5 +15,4 @@ Collected on 2026-08-28 from the local machine used for testing.
 | Node.js | v22.16.0 |
 | JMeter | 5.6.3 |
 
-The student must still attach a `dxdiag` screenshot showing the same hostname. This text table does not replace the mandatory screenshot.
-
+The matching `dxdiag` screenshot is stored as `23127414_Hardware_DxDiag_MINHLUAN.png`. It shows hostname `MINHLUAN`, Windows 11, the Intel Core i5-11400H processor, 16 GB RAM and DirectX 12.

@@ -3,7 +3,7 @@
 - Student ID: `23127414`
 - SUT: EShop (`ttbhanh/eshop-sut`)
 - Tool: Apache JMeter 5.6.3
-- Status: Technical work complete; awaiting student `dxdiag` and unlisted-video evidence
+- Status: Technical work and primary evidence complete; awaiting the separate Agent Skill demo, final review and submission
 - Public repository: `https://github.com/luanthuco11/23KTPM4-KTPM-HW5`
 - Proposed submission filename after evidence is added: `23127414_HW05_AI_Performance_090.zip`
 
@@ -119,9 +119,9 @@ The suffix identifies the execution campaign. Load uses `20260828`; Spike and So
 - [x] Agent Skill implementation and validation on the official Stress JTL.
 - [ ] Agent Skill demonstration segment in the unlisted video.
 - [x] Hardware specification table for host `MINHLUAN`.
-- [ ] Hardware screenshot (`dxdiag`) with hostname `MINHLUAN`.
-- [ ] At least six minutes of unlisted YouTube video with the student's Vietnamese narration.
-- [ ] Add the unlisted URL to `evidence/video-link.txt` and this README.
+- [x] Hardware screenshot (`dxdiag`) with hostname `MINHLUAN`.
+- [x] Vietnamese-narrated YouTube video: 6 minutes 05 seconds.
+- [x] Add the video URL to `evidence/video-link.txt` and this README.
 - [ ] Push/merge the completed branch to the public repository.
 - [ ] Moodle submission.
 - [ ] Optional: publish any selected draft from `report/github-issue-drafts.md` and add its URL.
@@ -133,7 +133,8 @@ The suffix identifies the execution campaign. Load uses `20260828`; Spike and So
 - Evidence-supported endurance threshold: 300 VUs, approximately 409.5 endpoint requests/s and 58.277 complete workflows/s for 15 minutes, with 0% errors.
 - Practical Stress degradation threshold: approximately 800–900 VUs under the tested linear ramp.
 - Published bugs/performance issues: 0; prepared evidence-backed Issue drafts: 3.
-- Demo video: pending student upload.
+- Main demo video (06:05): https://youtu.be/GMl2YKZG3M0
+- Separate Agent Skill demo: pending student upload.
 
 ## Source baseline
 
