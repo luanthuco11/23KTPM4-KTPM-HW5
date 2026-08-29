@@ -122,7 +122,7 @@ The suffix identifies the execution campaign. Load uses `20260828`; Spike and So
 - [x] Hardware screenshot (`dxdiag`) with hostname `MINHLUAN`.
 - [x] Vietnamese-narrated YouTube video: 6 minutes 05 seconds.
 - [x] Add the video URL to `evidence/video-link.txt` and this README.
-- [ ] Push/merge the completed branch to the public repository.
+- [x] Push/merge the completed work to the public repository `main` branch.
 - [ ] Moodle submission.
 - [ ] Optional: publish any selected draft from `report/github-issue-drafts.md` and add its URL.
 
