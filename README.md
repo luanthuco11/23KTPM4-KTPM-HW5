@@ -36,21 +36,21 @@ Login
 
 Endpoint-group coverage:
 
-| Group | Requests |
-|---|---|
-| Auth-heavy | `POST /api/login` |
-| Read-heavy | `GET /api/products`, `GET /api/products/:id`, `GET /api/cart` |
-| Transactional | `POST /api/cart`, `POST /api/checkout` |
-| Verification | `GET /api/orders/my-orders` |
+| Group         | Requests                                                      |
+| ------------- | ------------------------------------------------------------- |
+| Auth-heavy    | `POST /api/login`                                             |
+| Read-heavy    | `GET /api/products`, `GET /api/products/:id`, `GET /api/cart` |
+| Transactional | `POST /api/cart`, `POST /api/checkout`                        |
+| Verification  | `GET /api/orders/my-orders`                                   |
 
 ## Planned scenarios
 
-| Scenario | Test plan | Distinct JMeter report view | Status |
-|---|---|---|---|
-| Load | `23127414_Load_20260828.jmx` | Summary Report | Completed — 0% errors; screenshots added |
-| Stress | `23127414_Stress_20260828.jmx` | Aggregate Report | Completed — 0% errors; screenshots added |
-| Spike | `23127414_Spike_20260829.jmx` | View Results Tree | Completed — 0% errors; screenshots added |
-| Soak | `23127414_Soak_20260829.jmx` | Simple Data Writer + HTML Dashboard | Completed — 0% errors; screenshots added |
+| Scenario | Test plan                      | Distinct JMeter report view         | Status                                   |
+| -------- | ------------------------------ | ----------------------------------- | ---------------------------------------- |
+| Load     | `23127414_Load_20260828.jmx`   | Summary Report                      | Completed — 0% errors; screenshots added |
+| Stress   | `23127414_Stress_20260828.jmx` | Aggregate Report                    | Completed — 0% errors; screenshots added |
+| Spike    | `23127414_Spike_20260829.jmx`  | View Results Tree                   | Completed — 0% errors; screenshots added |
+| Soak     | `23127414_Soak_20260829.jmx`   | Simple Data Writer + HTML Dashboard | Completed — 0% errors; screenshots added |
 
 The suffix identifies the execution campaign. Load uses `20260828`; Spike and Soak use their actual date `20260829`. Stress retained campaign suffix `20260828` although immutable JTL timestamps show it started after midnight on `2026-08-29`; this discrepancy is documented rather than rewriting evidence.
 
@@ -124,8 +124,6 @@ The suffix identifies the execution campaign. Load uses `20260828`; Spike and So
 - [x] Vietnamese-narrated YouTube video: 6 minutes 05 seconds.
 - [x] Add the video URL to `evidence/video-link.txt` and this README.
 - [x] Push/merge the completed work to the public repository `main` branch.
-- [ ] Moodle submission.
-- [ ] Optional: publish any selected draft from `report/github-issue-drafts.md` and add its URL.
 
 ## Submission summary
 
