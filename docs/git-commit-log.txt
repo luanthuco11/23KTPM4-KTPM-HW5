@@ -27,3 +27,5 @@ f3cca5e | 2026-08-29T02:02:13+07:00 | test: record official soak endurance resul
 b402499 | 2026-08-29T02:18:08+07:00 | docs: add final video review guide
 ae2e745 | 2026-08-29T02:19:24+07:00 | docs: update final commit history
 115063b | 2026-08-29T09:52:13+07:00 | docs: add final hardware and video evidence
+7a0a4b2 | 2026-08-29T09:52:34+07:00 | docs: record evidence commit
+855ae91 | 2026-08-29T09:56:32+07:00 | docs: add agent skill demonstration video
