@@ -6,6 +6,9 @@
 - Công cụ: Apache JMeter 5.6.3
 - SUT baseline: `85af3ba875c88283615e22cb108f13e2fccaf0e9`
 - Ngày chạy chính thức: 28–29/08/2026 (Load, Stress, Spike và Soak đã hoàn thành)
+- Public GitHub repository: https://github.com/luanthuco11/23KTPM4-KTPM-HW5
+- Test plans: https://github.com/luanthuco11/23KTPM4-KTPM-HW5/tree/main/test-plans
+- Test data: https://github.com/luanthuco11/23KTPM4-KTPM-HW5/tree/main/data
 
 ## 2. Môi trường kiểm thử
 
