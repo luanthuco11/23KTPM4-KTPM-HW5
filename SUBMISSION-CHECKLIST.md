@@ -23,7 +23,7 @@
 
 - [x] Add a real `dxdiag` screenshot showing hostname `MINHLUAN` to `evidence/hardware/`.
 - [x] Finish the Vietnamese-narrated video (6 minutes 05 seconds).
-- [ ] Include a short Agent Skill/analyzer demonstration segment in that video.
+- [x] Include a separate Agent Skill/analyzer demonstration video (2 minutes 14 seconds).
 - [x] Prepare the detailed recording script in `docs/video-demo-guide.md`.
 - [x] Add the accessible YouTube URL to `evidence/video-link.txt` and `README.md`.
 - [ ] Decide whether to publish any draft in `report/github-issue-drafts.md`; add real Issue URLs only if published.

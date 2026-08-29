@@ -3,7 +3,7 @@
 - Student ID: `23127414`
 - SUT: EShop (`ttbhanh/eshop-sut`)
 - Tool: Apache JMeter 5.6.3
-- Status: Technical work and primary evidence complete; awaiting the separate Agent Skill demo, final review and submission
+- Status: Technical work and evidence complete; awaiting final review, packaging and submission
 - Public repository: `https://github.com/luanthuco11/23KTPM4-KTPM-HW5`
 - Proposed submission filename after evidence is added: `23127414_HW05_AI_Performance_090.zip`
 
@@ -16,7 +16,7 @@
 | 3 | Task 1 — Spike testing | 20 | 20 |
 | 4 | Task 2 — AI analysis and misinterpretation hunt | 10 | 10 |
 | 5 | Task 3 — Continuous Performance Testing proposal | 10 | 10 |
-| 6 | Agent Skill | 10 | 10, conditional on adding the recorded skill-demo segment |
+| 6 | Agent Skill | 10 | 10 |
 | | Total of listed rubric rows | 90 | 90 |
 
 The assignment template prints `Total 100`, although its six published row weights sum to 90. The proposed three-digit self-assessed grade is therefore `090`; the student should confirm this interpretation before final submission.
@@ -117,7 +117,7 @@ The suffix identifies the execution campaign. Load uses `20260828`; Spike and So
 - [x] Spike Statistics, active-thread, response-time and Task Manager screenshots plus backend resource CSV.
 - [x] Soak Statistics, response-time, active-thread, throughput and Task Manager screenshots plus backend resource CSV.
 - [x] Agent Skill implementation and validation on the official Stress JTL.
-- [ ] Agent Skill demonstration segment in the unlisted video.
+- [x] Separate Agent Skill demonstration video (2 minutes 14 seconds).
 - [x] Hardware specification table for host `MINHLUAN`.
 - [x] Hardware screenshot (`dxdiag`) with hostname `MINHLUAN`.
 - [x] Vietnamese-narrated YouTube video: 6 minutes 05 seconds.
@@ -134,7 +134,7 @@ The suffix identifies the execution campaign. Load uses `20260828`; Spike and So
 - Practical Stress degradation threshold: approximately 800–900 VUs under the tested linear ramp.
 - Published bugs/performance issues: 0; prepared evidence-backed Issue drafts: 3.
 - Main demo video (06:05): https://youtu.be/GMl2YKZG3M0
-- Separate Agent Skill demo: pending student upload.
+- Separate Agent Skill demo (02:14): https://youtu.be/L6Nb5ZA7VVQ
 
 ## Source baseline
 
