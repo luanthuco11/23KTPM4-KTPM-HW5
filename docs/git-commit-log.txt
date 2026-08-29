@@ -25,3 +25,5 @@ f3cca5e | 2026-08-29T02:02:13+07:00 | test: record official soak endurance resul
 851a008 | 2026-08-29T02:13:15+07:00 | docs: add submission checklist and commit log
 443a55e | 2026-08-29T02:17:09+07:00 | docs: embed continuous testing flowchart
 b402499 | 2026-08-29T02:18:08+07:00 | docs: add final video review guide
+ae2e745 | 2026-08-29T02:19:24+07:00 | docs: update final commit history
+115063b | 2026-08-29T09:52:13+07:00 | docs: add final hardware and video evidence
